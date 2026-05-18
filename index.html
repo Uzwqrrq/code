@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>简中互联网测评：你是哪方大神？</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(165deg, #FFF8F0 0%, #FFE6D5 40%, #FFDDB5 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -15%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 179, 120, 0.16), transparent 60%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: -10%;
+      right: -10%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle at 70% 70%, rgba(255, 198, 143, 0.14), transparent 60%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .floating-emoji {
+      position: fixed;
+      font-size: 2.5rem;
+      opacity: 0.07;
+      z-index: 0;
+      pointer-events: none;
+      animation: float 9s ease-in-out infinite;
+    }
+
+    .floating-emoji:nth-child(1) {
+      top: 7%;
+      left: 7%;
+      font-size: 3.2rem;
+      animation-delay: 0s;
+    }
+    .floating-emoji:nth-child(2) {
+      bottom: 10%;
+      right: 7%;
+      font-size: 2.6rem;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(3deg); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      background: #FFFFFF;
+      border-radius: 2.8rem;
+      box-shadow: 0 30px 55px rgba(255, 148, 62, 0.13), 0 8px 20px rgba(0, 0, 0, 0.02);
+      padding: 2.5rem 2rem;
+      position: relative;
+      z-index: 2;
+      border: 1px solid rgba(255, 172, 86, 0.13);
+    }
+
+    .screen {
+      animation: fadeSlide 0.3s ease;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .title-section {
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .main-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #FF8C42, #FF9F1C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #B45A2C;
+      background: rgba(253, 176, 96, 0.14);
+      display: inline-block;
+      padding: 0.35rem 1.4rem;
+      border-radius: 2rem;
+      font-weight: 500;
+    }
+
+    .hero-icon {
+      font-size: 4.5rem;
+      margin-bottom: 0.8rem;
+      display: block;
+      animation: gentleBounce 3s ease-in-out infinite;
+      filter: drop-shadow(0 12px 18px rgba(255, 142, 52, 0.22));
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .start-description {
+      color: #6B4226;
+      font-size: 1.05rem;
+      margin: 1rem 0 1.6rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .start-description .highlight {
+      color: #E07B39;
+      font-weight: 600;
+    }
+
+    .btn {
+      background: white;
+      border: 1px solid #FCD48F;
+      padding: 0.8rem 2rem;
+      border-radius: 2.5rem;
+      font-weight: 600;
+      color: #B45309;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: #FFFFFF;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #FFF5E9;
+      border-color: #FF9F3C;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #FF8C42, #FF9F1C);
+      border: none;
+      color: white;
+      box-shadow: 0 12px 24px rgba(255, 140, 66, 0.3);
+      padding: 0.9rem 2.5rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #FF9F1C, #FF8C42);
+      box-shadow: 0 16px 28px rgba(255, 140, 66, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      pointer-events: none;
+      background: #F5F5F5;
+      border-color: #E5E7EB;
+    }
+
+    .progress-wrapper {
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #92400E;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .progress-bar-bg {
+      height: 8px;
+      background: #FDE9CB;
+      border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #FF8C42, #FFB347);
+      border-radius: 20px;
+      transition: width 0.35s ease;
+    }
+
+    .question-card {
+      background: #FFFAF2;
+      border: 1px solid #FDD9A5;
+      border-radius: 2rem;
+      padding: 1.8rem 1.8rem;
+      margin: 1rem 0 1.6rem;
+      box-shadow: 0 10px 22px rgba(253, 168, 98, 0.12);
+    }
+
+    .question-text {
+      font-size: 1.4rem;
+      font-weight: 650;
+      color: #713F12;
+      line-height: 1.45;
+      margin-bottom: 1.8rem;
+      text-align: center;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .option-item {
+      background: white;
+      border: 1.5px solid #FDD9A5;
+      border-radius: 1.5rem;
+      padding: 1rem 1.4rem;
+      font-size: 1.02rem;
+      font-weight: 500;
+      color: #7C3A12;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: #FFFFFF;
+      line-height: 1.4;
+    }
+
+    .option-item:hover {
+      border-color: #FF8C42;
+      background: #FFF3E6;
+      box-shadow: 0 10px 20px rgba(255, 140, 66, 0.12);
+      transform: translateX(4px);
+    }
+
+    .option-item.selected {
+      border: 2px solid #FF8C42;
+      background: #FFF1E0;
+      box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+    }
+
+    .option-letter {
+      background: #FEEAD2;
+      color: #C45A1E;
+      font-weight: 700;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      transition: 0.2s;
+    }
+
+    .option-item:hover .option-letter,
+    .option-item.selected .option-letter {
+      background: #FF8C42;
+      color: white;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.6rem;
+    }
+
+    .question-counter {
+      color: #B45309;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .result-type {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #FF8C42;
+      text-align: center;
+      margin-bottom: 0.2rem;
+    }
+
+    .result-core {
+      text-align: center;
+      font-style: italic;
+      color: #713F12;
+      background: #FEF0D5;
+      padding: 0.9rem 1.5rem;
+      border-radius: 1.8rem;
+      margin: 1.2rem 0;
+      font-weight: 500;
+      font-size: 1.05rem;
+      border: 1px solid #FDD9A5;
+    }
+
+    .result-detail {
+      color: #3D291A;
+      line-height: 1.75;
+      font-size: 0.98rem;
+      margin: 1.2rem 0;
+      background: #FEFAF3;
+      padding: 1.2rem 1.4rem;
+      border-radius: 1.5rem;
+      border: 1px solid #FDE2B8;
+    }
+
+    .dimension-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .dimension-label {
+      width: 72px;
+      font-weight: 500;
+      color: #6B4226;
+      flex-shrink: 0;
+    }
+
+    .dimension-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: #FDE9CB;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .dimension-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #FF8C42, #FFB347);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .dimension-score {
+      width: 30px;
+      text-align: right;
+      color: #92400E;
+      font-weight: 600;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      justify-content: center;
+    }
+
+    .tag {
+      background: #FFF0DD;
+      color: #9A3B12;
+      padding: 0.35rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: 1px solid #FDD9A5;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1.2rem;
+        border-radius: 2.2rem;
+      }
+      .main-title {
+        font-size: 1.9rem;
+      }
+      .question-text {
+        font-size: 1.25rem;
+      }
+      .hero-icon {
+        font-size: 3.8rem;
+      }
+      .dimension-label {
+        width: 60px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-emoji" style="top:7%;left:7%;">🍊</div>
+  <div class="floating-emoji" style="bottom:10%;right:7%;">💬</div>
+
+  <div class="container" id="appContainer"></div>
+
+  <script>
+    (function() {
+      // ---------- 七种温和人格 ----------
+      const PERSONAS = {
+        normal: {
+          name: "温和冲浪者",
+          emoji: "🌿",
+          core: "文明上网，友善交流。",
+          description: "恭喜你！在喧嚣的互联网中，你是一位难得的<strong>温和冲浪者</strong>。你喜欢刷有趣的视频，也会在评论区留下友善的发言。面对争议，你更愿意理性讨论，而不是无脑站队。你的网络生活轻松而愉快，从不把负面情绪传递给陌生人。保持这份从容，你让互联网变得更温暖了一点点。"
+        },
+        joker: {
+          name: "欢乐寻觅者",
+          emoji: "😄",
+          core: "上网就是为了开心，能多笑一会就赚到了。",
+          description: "你是互联网的欢乐大使，无论刷到什么内容，总能找到有趣的视角。看到好玩的梗，你会顺手分享给朋友；遇到段子手，你会心生佩服。口头禅可能是“哈哈哈哈哈”或者“这个真的笑不活了”。你不爱争吵，也不喜欢严肃的说教，只希望每个打开的页面都能带来快乐。世界在你眼里是一场大型联欢会。"
+        },
+        thinker: {
+          name: "深度观察家",
+          emoji: "🔍",
+          core: "每一个现象背后，都有一套有趣的逻辑。",
+          description: "你热衷于探究事物背后的原因，不管是热门话题还是生活小事，都喜欢多问一个“为什么”。你可能是朋友圈里的“科普君”或“分析达人”，善于用逻辑和知识拆解复杂问题。你对科技、心理、社会现象充满好奇，虽然有时想得有点多，但这份认真让你显得特别靠谱。"
+        },
+        abstract: {
+          name: "抽象艺术家",
+          emoji: "🎨",
+          core: "用最离谱的方式，表达最纯粹的感受。",
+          description: "你深谙互联网的抽象文化，擅长用表情包、Emoji和网络迷因来表达情绪。你的聊天记录里充满了“绝绝子”、“蚌埠住了”和许多只有同好才懂的梗。你不喜欢平铺直叙，更享受用创意和幽默解构日常。别人可能觉得你有点莫名其妙，但懂你的人会和你一起哈哈大笑。"
+        },
+        repeater: {
+          name: "队形小能手",
+          emoji: "🦜",
+          core: "整齐的队形，是互联网的浪漫。",
+          description: "你乐于参与各种盖楼、复制粘贴活动，看到整齐的评论队形会感到莫名的舒适。“接龙”、“+1”和“俺也一样”是你的常用语。你享受集体刷屏的快乐，觉得这是网上最轻松的社交方式。虽然有时产出不多，但你的每一次参与都让气氛更热闹了。"
+        },
+        yinyang: {
+          name: "机智反讽师",
+          emoji: "😏",
+          core: "说话带点弯儿，机智又不失礼貌。",
+          description: "你擅长用反讽和幽默来表达观点，话里常有弦外之音，但从不人身攻击。你发评论前会精心加上狗头表情包保命，喜欢那种心照不宣的交流感。你的文字常常让人会心一笑，或者细细琢磨后才恍然大悟。你不是真的在嘲讽，只是更喜欢用轻松的方式参与对话。"
+        },
+        debater: {
+          name: "热心辩手",
+          emoji: "💬",
+          core: "真理越辩越明，有理有据我最行。",
+          description: "你热爱在网络上参与各种讨论，不管是美食评测还是数码产品，都能看到你认真发言的身影。你尊重数据和事实，喜欢用条理清晰的论点来说服别人。虽然有时会争论到深夜，但你始终就事论事，从不谩骂。你让网络讨论变得更有质量，也结交了不少志同道合的朋友。"
+        }
+      };
+
+      // ---------- 温和版15道测试题 ----------
+      const QUESTIONS = [{
+        text: "看到热搜上出现一个搞笑话题，你会？",
+        options: [
+          { text: "迅速点赞并转发给好朋友们一起乐", scores: { joker: 3, repeater: 1 } },
+          { text: "研究一下这个梗是怎么火起来的", scores: { thinker: 3 } },
+          { text: "在评论区发挥创意，写一个更绝的段子", scores: { abstract: 2, yinyang: 1 } },
+          { text: "默默看完，然后继续刷下一条", scores: { normal: 3 } }
+        ]
+      }, {
+        text: "看到朋友圈有人发了一条很长的生活感悟，你通常会？",
+        options: [
+          { text: "点个赞，然后快速划走", scores: { joker: 2, normal: 1 } },
+          { text: "认真阅读，如果认同就评论几句鼓励的话", scores: { normal: 3, thinker: 1 } },
+          { text: "评论一个恰到好处的梗，让气氛轻松一点", scores: { abstract: 3, joker: 1 } },
+          { text: "在评论区友好地讨论文中某个观点", scores: { debater: 3, thinker: 1 } }
+        ]
+      }, {
+        text: "群里有人正在严肃地讨论一个技术问题，你最有可能？",
+        options: [
+          { text: "插一句“不明觉厉，坐等大佬总结”", scores: { repeater: 2, joker: 1 } },
+          { text: "加入讨论，贡献自己的专业知识", scores: { debater: 3, thinker: 1 } },
+          { text: "发个表情包缓和一下气氛，怕大家太紧绷", scores: { abstract: 2, joker: 1 } },
+          { text: "安静潜水学习，默默截图保存有用的内容", scores: { normal: 3, thinker: 2 } }
+        ]
+      }, {
+        text: "一个很火的新词/新梗出现了，你的反应是？",
+        options: [
+          { text: "马上学习它的用法，然后和朋友们一起用", scores: { repeater: 3, joker: 1 } },
+          { text: "查一下它的出处和演变过程，写个小科普", scores: { thinker: 3 } },
+          { text: "自己改编一下，创作一个新版本发出去", scores: { abstract: 3 } },
+          { text: "看看就好，觉得有意思就点赞，不一定自己用", scores: { normal: 2 } }
+        ]
+      }, {
+        text: "在网上看到两个人因为一件小事争论起来，你会？",
+        options: [
+          { text: "围观一下，看看谁说的更有道理", scores: { normal: 2, debater: 1 } },
+          { text: "试图帮双方理清思路，友好调解", scores: { normal: 3, thinker: 1 } },
+          { text: "截个图分享到群里，配一句“人类的多样性”", scores: { abstract: 2, joker: 2 } },
+          { text: "如果话题自己感兴趣，就也加入讨论", scores: { debater: 3 } }
+        ]
+      }, {
+        text: "你最喜欢的网络交流方式是？",
+        options: [
+          { text: "疯狂甩表情包，一切尽在不言中", scores: { abstract: 3, joker: 1 } },
+          { text: "打一大段字，有逻辑地阐述观点", scores: { debater: 3, thinker: 1 } },
+          { text: "复制流行语，保持队形整齐划一", scores: { repeater: 3 } },
+          { text: "简简单单，怎么舒服怎么来", scores: { normal: 3 } }
+        ]
+      }, {
+        text: "朋友分享了一件让自己生气的事，你多半会？",
+        options: [
+          { text: "先发个抱抱表情安慰一下，然后陪他吐槽", scores: { normal: 3, joker: 1 } },
+          { text: "帮他分析前因后果，看看问题出在哪", scores: { thinker: 3 } },
+          { text: "说个笑话或者最近的趣事，转移他注意力", scores: { joker: 3 } },
+          { text: "加入吐槽队伍，用幽默的方式一起发泄", scores: { abstract: 2, yinyang: 1 } }
+        ]
+      }, {
+        text: "你觉得上网最大的乐趣在于？",
+        options: [
+          { text: "发现各种新鲜有趣的内容，笑到肚子疼", scores: { joker: 3 } },
+          { text: "学到新知识，拓宽自己的眼界", scores: { thinker: 3 } },
+          { text: "和朋友们互动，用梗交流默契十足", scores: { abstract: 2, repeater: 1 } },
+          { text: "轻松随意地看看，没有负担地放松", scores: { normal: 3 } }
+        ]
+      }, {
+        text: "评论区里有人发表了一段和你不同看法的观点，你会？",
+        options: [
+          { text: "看看对方的论据，说不定是自己没想到的", scores: { normal: 3, thinker: 1 } },
+          { text: "礼貌地回复自己的看法，表示可以继续探讨", scores: { debater: 3 } },
+          { text: "点个赞表示尊重，但不一定回复", scores: { normal: 2 } },
+          { text: "用个玩笑带过，不想让气氛太严肃", scores: { joker: 2, yinyang: 1 } }
+        ]
+      }, {
+        text: "当看到有人在疯狂刷屏时，你通常？",
+        options: [
+          { text: "觉得热闹，也跟着刷几条队形", scores: { repeater: 3, joker: 1 } },
+          { text: "提醒一下对方注意频率，或者开玩笑说“你发慢点我跟不上了”", scores: { yinyang: 2, normal: 1 } },
+          { text: "默默开启免打扰，或者等刷屏结束了再看", scores: { normal: 3 } },
+          { text: "加入其中，但用自己的创意改编刷屏内容", scores: { abstract: 3 } }
+        ]
+      }, {
+        text: "对于“网络流行语”，你的看法是？",
+        options: [
+          { text: "很有趣，让交流变得轻松又好玩", scores: { joker: 2, abstract: 1 } },
+          { text: "一种语言现象，值得观察和研究", scores: { thinker: 3 } },
+          { text: "该用的时候用，但也不会刻意追逐潮流", scores: { normal: 2 } },
+          { text: "喜欢把自己学会的新词教给还不会的亲友", scores: { repeater: 2, joker: 1 } }
+        ]
+      }, {
+        text: "你被拉进一个全是陌生人的大群，通常会？",
+        options: [
+          { text: "先潜水看看大家在聊什么，再决定要不要说话", scores: { normal: 3 } },
+          { text: "发个有趣的表情包当作打招呼", scores: { abstract: 2, joker: 1 } },
+          { text: "如果看到感兴趣的话题，就直接加入讨论", scores: { debater: 3 } },
+          { text: "安静地待着，偶尔出来接个梗", scores: { repeater: 2, yinyang: 1 } }
+        ]
+      }, {
+        text: "你喜欢的Emoji组合更接近？",
+        options: [
+          { text: "😂🌻（开心+向日葵）", scores: { joker: 3 } },
+          { text: "🧐📚（思考+书籍）", scores: { thinker: 3 } },
+          { text: "🎉🐧（庆祝+企鹅，企鹅代表群居）", scores: { repeater: 2, abstract: 1 } },
+          { text: "🌸☕（花+咖啡，平和惬意）", scores: { normal: 3 } }
+        ]
+      }, {
+        text: "“哈哈哈哈哈哈”这句话你通常什么时候发？",
+        options: [
+          { text: "真的被逗笑了，开心地分享快乐", scores: { joker: 3 } },
+          { text: "配合别人的梗，烘托热闹氛围", scores: { abstract: 2, repeater: 1 } },
+          { text: "看到很幽默的评论，忍不住笑出声", scores: { normal: 2, joker: 1 } },
+          { text: "顺手发一串，表示已阅且友好", scores: { repeater: 3 } }
+        ]
+      }, {
+        text: "如果明天网络突然中断一整天，你最大的遗憾是？",
+        options: [
+          { text: "不能看最新的段子和有趣视频了", scores: { joker: 3 } },
+          { text: "手头正在研究的几个问题没法查资料了", scores: { thinker: 3 } },
+          { text: "不能和群友们默契地刷队形了", scores: { repeater: 3 } },
+          { text: "少了和朋友轻松聊天的乐趣，但也能用其他方式代替", scores: { normal: 3 } }
+        ]
+      }];
+
+      // ---------- 状态管理 ----------
+      const state = {
+        screen: 'start',
+        currentQuestion: 0,
+        answers: new Array(QUESTIONS.length).fill(null),
+        scores: { normal: 0, joker: 0, thinker: 0, abstract: 0, repeater: 0, yinyang: 0, debater: 0 }
+      };
+
+      const container = document.getElementById('appContainer');
+
+      function render() {
+        if (state.screen === 'start') renderStart();
+        else if (state.screen === 'question') renderQuestion();
+        else if (state.screen === 'result') renderResult();
+      }
+
+      function renderStart() {
+        const html = `
+          <div class="screen start-screen" style="text-align:center;">
+            <span class="hero-icon">🍊</span>
+            <div class="title-section">
+              <div class="main-title">简中互联网测评</div>
+              <div class="subtitle">你是哪方大神？</div>
+            </div>
+            <div class="start-description">
+              15道趣味问题，发现你在网络世界的<span class="highlight">独特风格</span>。
+            </div>
+            <button class="btn btn-primary" id="startBtn">
+              🚀 开始测试
+            </button>
+            <p style="margin-top:1.4rem;font-size:0.8rem;color:#B08B6F;letter-spacing:0.02em;">
+              纯娱乐向 · 温和友好 · 无数据上传
+            </p>
+          </div>
+        `;
+        container.innerHTML = html;
+        document.getElementById('startBtn').addEventListener('click', () => {
+          state.screen = 'question';
+          state.currentQuestion = 0;
+          state.answers = new Array(QUESTIONS.length).fill(null);
+          resetScores();
+          render();
+        });
+      }
+
+      function resetScores() {
+        state.scores = { normal: 0, joker: 0, thinker: 0, abstract: 0, repeater: 0, yinyang: 0, debater: 0 };
+      }
+
+      function calculateAllScores() {
+        resetScores();
+        state.answers.forEach((optIndex, qIndex) => {
+          if (optIndex === null) return;
+          const selectedOption = QUESTIONS[qIndex].options[optIndex];
+          for (let [key, value] of Object.entries(selectedOption.scores)) {
+            state.scores[key] = (state.scores[key] || 0) + value;
+          }
+        });
+      }
+
+      function getTopPersona() {
+        let maxKey = 'normal';
+        let maxVal = -999;
+        for (let [key, val] of Object.entries(state.scores)) {
+          if (val > maxVal) {
+            maxVal = val;
+            maxKey = key;
+          }
+        }
+        return maxKey;
+      }
+
+      function selectOption(index) {
+        state.answers[state.currentQuestion] = index;
+        const options = document.querySelectorAll('.option-item');
+        options.forEach((opt, i) => {
+          if (i === index) opt.classList.add('selected');
+          else opt.classList.remove('selected');
+        });
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) nextBtn.disabled = false;
+      }
+
+      function renderQuestion() {
+        const q = QUESTIONS[state.currentQuestion];
+        const total = QUESTIONS.length;
+        const current = state.currentQuestion + 1;
+        const progress = Math.round((state.currentQuestion / total) * 100);
+        const selectedAnswer = state.answers[state.currentQuestion];
+
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+          const letter = String.fromCharCode(65 + idx);
+          const selectedClass = (selectedAnswer === idx) ? 'selected' : '';
+          optionsHtml += `
+            <div class="option-item ${selectedClass}" data-option-index="${idx}">
+              <span class="option-letter">${letter}</span>
+              <span>${opt.text}</span>
+            </div>
+          `;
+        });
+
+        const html = `
+          <div class="screen question-screen">
+            <div class="title-section">
+              <div class="main-title" style="font-size:1.6rem;">🧪 简中互联网测评</div>
+            </div>
+            <div class="progress-wrapper">
+              <div class="progress-info">
+                <span>第 ${current}/${total} 题</span>
+                <span>${progress}%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-fill" style="width:${progress}%;"></div>
+              </div>
+            </div>
+            <div class="question-card">
+              <div class="question-text">${q.text}</div>
+              <div class="options-grid" id="optionsContainer">
+                ${optionsHtml}
+              </div>
+            </div>
+            <div class="nav-buttons">
+              <button class="btn" id="prevBtn" ${state.currentQuestion === 0 ? 'disabled' : ''}>
+                ← 上一题
+              </button>
+              <span class="question-counter">${current}/${total}</span>
+              <button class="btn btn-primary" id="nextBtn" ${selectedAnswer === null ? 'disabled' : ''}>
+                ${state.currentQuestion === total - 1 ? '查看结果 🎉' : '下一题 →'}
+              </button>
+            </div>
+          </div>
+        `;
+        container.innerHTML = html;
+
+        document.querySelectorAll('.option-item').forEach(item => {
+          item.addEventListener('click', function(e) {
+            const index = parseInt(this.dataset.optionIndex);
+            selectOption(index);
+          });
+        });
+
+        document.getElementById('prevBtn')?.addEventListener('click', () => {
+          if (state.currentQuestion > 0) {
+            state.currentQuestion--;
+            render();
+          }
+        });
+
+        document.getElementById('nextBtn')?.addEventListener('click', () => {
+          if (state.currentQuestion < total - 1) {
+            state.currentQuestion++;
+            render();
+          } else {
+            calculateAllScores();
+            state.screen = 'result';
+            render();
+          }
+        });
+      }
+
+      function renderResult() {
+        const personaKey = getTopPersona();
+        const persona = PERSONAS[personaKey];
+        const maxScore = Math.max(...Object.values(state.scores), 1);
+        const dimensionList = [
+          { key: 'normal', label: '🌿 温和', val: state.scores.normal },
+          { key: 'joker', label: '😄 欢乐', val: state.scores.joker },
+          { key: 'thinker', label: '🔍 深度', val: state.scores.thinker },
+          { key: 'abstract', label: '🎨 抽象', val: state.scores.abstract },
+          { key: 'repeater', label: '🦜 队形', val: state.scores.repeater },
+          { key: 'yinyang', label: '😏 反讽', val: state.scores.yinyang },
+          { key: 'debater', label: '💬 辩论', val: state.scores.debater }
+        ];
+
+        let dimensionBars = '';
+        dimensionList.forEach(d => {
+          const percent = Math.round((d.val / maxScore) * 100);
+          const barColor = d.key === 'normal' ?
+            'linear-gradient(90deg, #5B9F5F, #7CBF7C)' :
+            'linear-gradient(90deg, #FF8C42, #FFB347)';
+          dimensionBars += `
+            <div class="dimension-row">
+              <span class="dimension-label">${d.label}</span>
+              <div class="dimension-bar-bg">
+                <div class="dimension-bar-fill" style="width:${percent}%; background:${barColor};"></div>
+              </div>
+              <span class="dimension-score">${d.val}</span>
+            </div>
+          `;
+        });
+
+        const html = `
+          <div class="screen result-screen">
+            <div class="title-section">
+              <div style="font-size:3.8rem;">${persona.emoji}</div>
+              <div class="result-type" style="color:${personaKey === 'normal' ? '#5B9F5F' : '#FF8C42'};">${persona.name}</div>
+              <div class="subtitle">你的互联网风格鉴定</div>
+            </div>
+            <div class="result-core" style="${personaKey === 'normal' ? 'border-color:#A3D9A3; background:#F2FAF2;' : ''}">
+              “${persona.core}”
+            </div>
+            <div class="result-detail">
+              ${persona.description}
+            </div>
+            <div style="margin:1.5rem 0 0.8rem;">
+              <h4 style="color:#713F12;margin-bottom:0.8rem;font-weight:600;">📊 维度分析</h4>
+              ${dimensionBars}
+            </div>
+            <div class="tag-group">
+              <span class="tag" style="${personaKey === 'normal' ? 'background:#E8F5E8;color:#3B6E3B;border-color:#A3D9A3;' : ''}">${persona.emoji} ${persona.name}认证</span>
+              <span class="tag">纯娱乐向</span>
+              <span class="tag">温和友好</span>
+            </div>
+            <div style="display:flex;gap:1rem;margin-top:1.8rem;justify-content:center;flex-wrap:wrap;">
+              <button class="btn" id="restartBtn">🔄 重新测试</button>
+              <button class="btn btn-primary" id="shareBtn">📋 复制结果文案</button>
+            </div>
+            <p style="text-align:center;margin-top:1.2rem;font-size:0.78rem;color:#B08B6F;">
+              本测试纯属娱乐，不代表任何科学依据。<br>你是独一无二的，别被标签定义。
+            </p>
+          </div>
+        `;
+        container.innerHTML = html;
+
+        document.getElementById('restartBtn').addEventListener('click', () => {
+          state.screen = 'start';
+          state.currentQuestion = 0;
+          state.answers = new Array(QUESTIONS.length).fill(null);
+          resetScores();
+          render();
+        });
+
+        document.getElementById('shareBtn').addEventListener('click', () => {
+          const shareText = `【简中互联网测评】\n我的风格是：${persona.emoji} ${persona.name}\n核心信条：${persona.core}\n测测你是什么风格？👉 [链接]`;
+          navigator.clipboard.writeText(shareText).then(() => {
+            alert('结果文案已复制到剪贴板！快去发给朋友吧～');
+          }).catch(() => {
+            prompt('手动复制以下文案分享给朋友：', shareText);
+          });
+        });
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
