@@ -1,851 +1,1983 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>简中互联网测评：你是哪方大神？</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(165deg, #FFF8F0 0%, #FFE6D5 40%, #FFDDB5 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      margin: 0;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: -20%;
-      left: -15%;
-      width: 70%;
-      height: 70%;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 179, 120, 0.16), transparent 60%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      bottom: -10%;
-      right: -10%;
-      width: 70%;
-      height: 70%;
-      background: radial-gradient(circle at 70% 70%, rgba(255, 198, 143, 0.14), transparent 60%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .floating-emoji {
-      position: fixed;
-      font-size: 2.5rem;
-      opacity: 0.07;
-      z-index: 0;
-      pointer-events: none;
-      animation: float 9s ease-in-out infinite;
-    }
-
-    .floating-emoji:nth-child(1) {
-      top: 7%;
-      left: 7%;
-      font-size: 3.2rem;
-      animation-delay: 0s;
-    }
-    .floating-emoji:nth-child(2) {
-      bottom: 10%;
-      right: 7%;
-      font-size: 2.6rem;
-      animation-delay: -5s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-16px) rotate(3deg); }
-    }
-
-    .container {
-      width: 100%;
-      max-width: 680px;
-      background: #FFFFFF;
-      border-radius: 2.8rem;
-      box-shadow: 0 30px 55px rgba(255, 148, 62, 0.13), 0 8px 20px rgba(0, 0, 0, 0.02);
-      padding: 2.5rem 2rem;
-      position: relative;
-      z-index: 2;
-      border: 1px solid rgba(255, 172, 86, 0.13);
-    }
-
-    .screen {
-      animation: fadeSlide 0.3s ease;
-    }
-
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(8px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .title-section {
-      text-align: center;
-      margin-bottom: 1.2rem;
-    }
-
-    .main-title {
-      font-size: 2.3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #FF8C42, #FF9F1C);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 0.02em;
-      line-height: 1.3;
-      margin-bottom: 0.35rem;
-    }
-
-    .subtitle {
-      font-size: 1rem;
-      color: #B45A2C;
-      background: rgba(253, 176, 96, 0.14);
-      display: inline-block;
-      padding: 0.35rem 1.4rem;
-      border-radius: 2rem;
-      font-weight: 500;
-    }
-
-    .hero-icon {
-      font-size: 4.5rem;
-      margin-bottom: 0.8rem;
-      display: block;
-      animation: gentleBounce 3s ease-in-out infinite;
-      filter: drop-shadow(0 12px 18px rgba(255, 142, 52, 0.22));
-    }
-
-    @keyframes gentleBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    .start-description {
-      color: #6B4226;
-      font-size: 1.05rem;
-      margin: 1rem 0 1.6rem;
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    .start-description .highlight {
-      color: #E07B39;
-      font-weight: 600;
-    }
-
-    .btn {
-      background: white;
-      border: 1px solid #FCD48F;
-      padding: 0.8rem 2rem;
-      border-radius: 2.5rem;
-      font-weight: 600;
-      color: #B45309;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.25s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      background: #FFFFFF;
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      background: #FFF5E9;
-      border-color: #FF9F3C;
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #FF8C42, #FF9F1C);
-      border: none;
-      color: white;
-      box-shadow: 0 12px 24px rgba(255, 140, 66, 0.3);
-      padding: 0.9rem 2.5rem;
-      font-size: 1.1rem;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #FF9F1C, #FF8C42);
-      box-shadow: 0 16px 28px rgba(255, 140, 66, 0.4);
-      transform: translateY(-2px);
-    }
-
-    .btn:disabled {
-      opacity: 0.45;
-      pointer-events: none;
-      background: #F5F5F5;
-      border-color: #E5E7EB;
-    }
-
-    .progress-wrapper {
-      margin: 1.5rem 0 1rem 0;
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      color: #92400E;
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-    }
-
-    .progress-bar-bg {
-      height: 8px;
-      background: #FDE9CB;
-      border-radius: 20px;
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #FF8C42, #FFB347);
-      border-radius: 20px;
-      transition: width 0.35s ease;
-    }
-
-    .question-card {
-      background: #FFFAF2;
-      border: 1px solid #FDD9A5;
-      border-radius: 2rem;
-      padding: 1.8rem 1.8rem;
-      margin: 1rem 0 1.6rem;
-      box-shadow: 0 10px 22px rgba(253, 168, 98, 0.12);
-    }
-
-    .question-text {
-      font-size: 1.4rem;
-      font-weight: 650;
-      color: #713F12;
-      line-height: 1.45;
-      margin-bottom: 1.8rem;
-      text-align: center;
-    }
-
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .option-item {
-      background: white;
-      border: 1.5px solid #FDD9A5;
-      border-radius: 1.5rem;
-      padding: 1rem 1.4rem;
-      font-size: 1.02rem;
-      font-weight: 500;
-      color: #7C3A12;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: #FFFFFF;
-      line-height: 1.4;
-    }
-
-    .option-item:hover {
-      border-color: #FF8C42;
-      background: #FFF3E6;
-      box-shadow: 0 10px 20px rgba(255, 140, 66, 0.12);
-      transform: translateX(4px);
-    }
-
-    .option-item.selected {
-      border: 2px solid #FF8C42;
-      background: #FFF1E0;
-      box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
-    }
-
-    .option-letter {
-      background: #FEEAD2;
-      color: #C45A1E;
-      font-weight: 700;
-      width: 2.2rem;
-      height: 2.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 1rem;
-      font-size: 0.95rem;
-      flex-shrink: 0;
-      transition: 0.2s;
-    }
-
-    .option-item:hover .option-letter,
-    .option-item.selected .option-letter {
-      background: #FF8C42;
-      color: white;
-    }
-
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.6rem;
-    }
-
-    .question-counter {
-      color: #B45309;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .result-type {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #FF8C42;
-      text-align: center;
-      margin-bottom: 0.2rem;
-    }
-
-    .result-core {
-      text-align: center;
-      font-style: italic;
-      color: #713F12;
-      background: #FEF0D5;
-      padding: 0.9rem 1.5rem;
-      border-radius: 1.8rem;
-      margin: 1.2rem 0;
-      font-weight: 500;
-      font-size: 1.05rem;
-      border: 1px solid #FDD9A5;
-    }
-
-    .result-detail {
-      color: #3D291A;
-      line-height: 1.75;
-      font-size: 0.98rem;
-      margin: 1.2rem 0;
-      background: #FEFAF3;
-      padding: 1.2rem 1.4rem;
-      border-radius: 1.5rem;
-      border: 1px solid #FDE2B8;
-    }
-
-    .dimension-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.6rem;
-      font-size: 0.9rem;
-    }
-
-    .dimension-label {
-      width: 72px;
-      font-weight: 500;
-      color: #6B4226;
-      flex-shrink: 0;
-    }
-
-    .dimension-bar-bg {
-      flex: 1;
-      height: 10px;
-      background: #FDE9CB;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .dimension-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #FF8C42, #FFB347);
-      border-radius: 10px;
-      transition: width 0.5s ease;
-    }
-
-    .dimension-score {
-      width: 30px;
-      text-align: right;
-      color: #92400E;
-      font-weight: 600;
-    }
-
-    .tag-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1.5rem 0;
-      justify-content: center;
-    }
-
-    .tag {
-      background: #FFF0DD;
-      color: #9A3B12;
-      padding: 0.35rem 1.2rem;
-      border-radius: 2rem;
-      font-size: 0.88rem;
-      font-weight: 500;
-      border: 1px solid #FDD9A5;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 2rem 1.2rem;
-        border-radius: 2.2rem;
-      }
-      .main-title {
-        font-size: 1.9rem;
-      }
-      .question-text {
-        font-size: 1.25rem;
-      }
-      .hero-icon {
-        font-size: 3.8rem;
-      }
-      .dimension-label {
-        width: 60px;
-        font-size: 0.8rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>完美收纳大师 - 芒果TV</title>
+    <style>
+        :root {
+            --mango-orange: #FF6A00;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            overflow-y: auto;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        #game-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 3px #FF6A00;
+            background: #FFF8F0;
+            touch-action: none;
+        }
+        canvas {
+            display: block;
+            cursor: default;
+            touch-action: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="floating-emoji" style="top:7%;left:7%;">🍊</div>
-  <div class="floating-emoji" style="bottom:10%;right:7%;">💬</div>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
 
-  <div class="container" id="appContainer"></div>
+    <script>
+        (function() {
+            // ==================== 常量与配置 ====================
+            const LOGIC_WIDTH = 400;
+            const LOGIC_HEIGHT = 700;
+            const MANGO_ORANGE = '#FF6A00';
+            const MANGO_ORANGE_RGB = { r: 255, g: 106, b: 0 };
+            const CREAM_BG = '#FFF8F0';
+            const CREAM_BG_RGB = { r: 255, g: 248, b: 240 };
 
-  <script>
-    (function() {
-      // ---------- 七种温和人格 ----------
-      const PERSONAS = {
-        normal: {
-          name: "温和冲浪者",
-          emoji: "🌿",
-          core: "文明上网，友善交流。",
-          description: "恭喜你！在喧嚣的互联网中，你是一位难得的<strong>温和冲浪者</strong>。你喜欢刷有趣的视频，也会在评论区留下友善的发言。面对争议，你更愿意理性讨论，而不是无脑站队。你的网络生活轻松而愉快，从不把负面情绪传递给陌生人。保持这份从容，你让互联网变得更温暖了一点点。"
-        },
-        joker: {
-          name: "欢乐寻觅者",
-          emoji: "😄",
-          core: "上网就是为了开心，能多笑一会就赚到了。",
-          description: "你是互联网的欢乐大使，无论刷到什么内容，总能找到有趣的视角。看到好玩的梗，你会顺手分享给朋友；遇到段子手，你会心生佩服。口头禅可能是“哈哈哈哈哈”或者“这个真的笑不活了”。你不爱争吵，也不喜欢严肃的说教，只希望每个打开的页面都能带来快乐。世界在你眼里是一场大型联欢会。"
-        },
-        thinker: {
-          name: "深度观察家",
-          emoji: "🔍",
-          core: "每一个现象背后，都有一套有趣的逻辑。",
-          description: "你热衷于探究事物背后的原因，不管是热门话题还是生活小事，都喜欢多问一个“为什么”。你可能是朋友圈里的“科普君”或“分析达人”，善于用逻辑和知识拆解复杂问题。你对科技、心理、社会现象充满好奇，虽然有时想得有点多，但这份认真让你显得特别靠谱。"
-        },
-        abstract: {
-          name: "抽象艺术家",
-          emoji: "🎨",
-          core: "用最离谱的方式，表达最纯粹的感受。",
-          description: "你深谙互联网的抽象文化，擅长用表情包、Emoji和网络迷因来表达情绪。你的聊天记录里充满了“绝绝子”、“蚌埠住了”和许多只有同好才懂的梗。你不喜欢平铺直叙，更享受用创意和幽默解构日常。别人可能觉得你有点莫名其妙，但懂你的人会和你一起哈哈大笑。"
-        },
-        repeater: {
-          name: "队形小能手",
-          emoji: "🦜",
-          core: "整齐的队形，是互联网的浪漫。",
-          description: "你乐于参与各种盖楼、复制粘贴活动，看到整齐的评论队形会感到莫名的舒适。“接龙”、“+1”和“俺也一样”是你的常用语。你享受集体刷屏的快乐，觉得这是网上最轻松的社交方式。虽然有时产出不多，但你的每一次参与都让气氛更热闹了。"
-        },
-        yinyang: {
-          name: "机智反讽师",
-          emoji: "😏",
-          core: "说话带点弯儿，机智又不失礼貌。",
-          description: "你擅长用反讽和幽默来表达观点，话里常有弦外之音，但从不人身攻击。你发评论前会精心加上狗头表情包保命，喜欢那种心照不宣的交流感。你的文字常常让人会心一笑，或者细细琢磨后才恍然大悟。你不是真的在嘲讽，只是更喜欢用轻松的方式参与对话。"
-        },
-        debater: {
-          name: "热心辩手",
-          emoji: "💬",
-          core: "真理越辩越明，有理有据我最行。",
-          description: "你热爱在网络上参与各种讨论，不管是美食评测还是数码产品，都能看到你认真发言的身影。你尊重数据和事实，喜欢用条理清晰的论点来说服别人。虽然有时会争论到深夜，但你始终就事论事，从不谩骂。你让网络讨论变得更有质量，也结交了不少志同道合的朋友。"
-        }
-      };
+            // ==================== DOM元素 ====================
+            const canvas = document.getElementById('gameCanvas');
+            const container = document.getElementById('game-container');
+            const ctx = canvas.getContext('2d');
 
-      // ---------- 温和版15道测试题 ----------
-      const QUESTIONS = [{
-        text: "看到热搜上出现一个搞笑话题，你会？",
-        options: [
-          { text: "迅速点赞并转发给好朋友们一起乐", scores: { joker: 3, repeater: 1 } },
-          { text: "研究一下这个梗是怎么火起来的", scores: { thinker: 3 } },
-          { text: "在评论区发挥创意，写一个更绝的段子", scores: { abstract: 2, yinyang: 1 } },
-          { text: "默默看完，然后继续刷下一条", scores: { normal: 3 } }
-        ]
-      }, {
-        text: "看到朋友圈有人发了一条很长的生活感悟，你通常会？",
-        options: [
-          { text: "点个赞，然后快速划走", scores: { joker: 2, normal: 1 } },
-          { text: "认真阅读，如果认同就评论几句鼓励的话", scores: { normal: 3, thinker: 1 } },
-          { text: "评论一个恰到好处的梗，让气氛轻松一点", scores: { abstract: 3, joker: 1 } },
-          { text: "在评论区友好地讨论文中某个观点", scores: { debater: 3, thinker: 1 } }
-        ]
-      }, {
-        text: "群里有人正在严肃地讨论一个技术问题，你最有可能？",
-        options: [
-          { text: "插一句“不明觉厉，坐等大佬总结”", scores: { repeater: 2, joker: 1 } },
-          { text: "加入讨论，贡献自己的专业知识", scores: { debater: 3, thinker: 1 } },
-          { text: "发个表情包缓和一下气氛，怕大家太紧绷", scores: { abstract: 2, joker: 1 } },
-          { text: "安静潜水学习，默默截图保存有用的内容", scores: { normal: 3, thinker: 2 } }
-        ]
-      }, {
-        text: "一个很火的新词/新梗出现了，你的反应是？",
-        options: [
-          { text: "马上学习它的用法，然后和朋友们一起用", scores: { repeater: 3, joker: 1 } },
-          { text: "查一下它的出处和演变过程，写个小科普", scores: { thinker: 3 } },
-          { text: "自己改编一下，创作一个新版本发出去", scores: { abstract: 3 } },
-          { text: "看看就好，觉得有意思就点赞，不一定自己用", scores: { normal: 2 } }
-        ]
-      }, {
-        text: "在网上看到两个人因为一件小事争论起来，你会？",
-        options: [
-          { text: "围观一下，看看谁说的更有道理", scores: { normal: 2, debater: 1 } },
-          { text: "试图帮双方理清思路，友好调解", scores: { normal: 3, thinker: 1 } },
-          { text: "截个图分享到群里，配一句“人类的多样性”", scores: { abstract: 2, joker: 2 } },
-          { text: "如果话题自己感兴趣，就也加入讨论", scores: { debater: 3 } }
-        ]
-      }, {
-        text: "你最喜欢的网络交流方式是？",
-        options: [
-          { text: "疯狂甩表情包，一切尽在不言中", scores: { abstract: 3, joker: 1 } },
-          { text: "打一大段字，有逻辑地阐述观点", scores: { debater: 3, thinker: 1 } },
-          { text: "复制流行语，保持队形整齐划一", scores: { repeater: 3 } },
-          { text: "简简单单，怎么舒服怎么来", scores: { normal: 3 } }
-        ]
-      }, {
-        text: "朋友分享了一件让自己生气的事，你多半会？",
-        options: [
-          { text: "先发个抱抱表情安慰一下，然后陪他吐槽", scores: { normal: 3, joker: 1 } },
-          { text: "帮他分析前因后果，看看问题出在哪", scores: { thinker: 3 } },
-          { text: "说个笑话或者最近的趣事，转移他注意力", scores: { joker: 3 } },
-          { text: "加入吐槽队伍，用幽默的方式一起发泄", scores: { abstract: 2, yinyang: 1 } }
-        ]
-      }, {
-        text: "你觉得上网最大的乐趣在于？",
-        options: [
-          { text: "发现各种新鲜有趣的内容，笑到肚子疼", scores: { joker: 3 } },
-          { text: "学到新知识，拓宽自己的眼界", scores: { thinker: 3 } },
-          { text: "和朋友们互动，用梗交流默契十足", scores: { abstract: 2, repeater: 1 } },
-          { text: "轻松随意地看看，没有负担地放松", scores: { normal: 3 } }
-        ]
-      }, {
-        text: "评论区里有人发表了一段和你不同看法的观点，你会？",
-        options: [
-          { text: "看看对方的论据，说不定是自己没想到的", scores: { normal: 3, thinker: 1 } },
-          { text: "礼貌地回复自己的看法，表示可以继续探讨", scores: { debater: 3 } },
-          { text: "点个赞表示尊重，但不一定回复", scores: { normal: 2 } },
-          { text: "用个玩笑带过，不想让气氛太严肃", scores: { joker: 2, yinyang: 1 } }
-        ]
-      }, {
-        text: "当看到有人在疯狂刷屏时，你通常？",
-        options: [
-          { text: "觉得热闹，也跟着刷几条队形", scores: { repeater: 3, joker: 1 } },
-          { text: "提醒一下对方注意频率，或者开玩笑说“你发慢点我跟不上了”", scores: { yinyang: 2, normal: 1 } },
-          { text: "默默开启免打扰，或者等刷屏结束了再看", scores: { normal: 3 } },
-          { text: "加入其中，但用自己的创意改编刷屏内容", scores: { abstract: 3 } }
-        ]
-      }, {
-        text: "对于“网络流行语”，你的看法是？",
-        options: [
-          { text: "很有趣，让交流变得轻松又好玩", scores: { joker: 2, abstract: 1 } },
-          { text: "一种语言现象，值得观察和研究", scores: { thinker: 3 } },
-          { text: "该用的时候用，但也不会刻意追逐潮流", scores: { normal: 2 } },
-          { text: "喜欢把自己学会的新词教给还不会的亲友", scores: { repeater: 2, joker: 1 } }
-        ]
-      }, {
-        text: "你被拉进一个全是陌生人的大群，通常会？",
-        options: [
-          { text: "先潜水看看大家在聊什么，再决定要不要说话", scores: { normal: 3 } },
-          { text: "发个有趣的表情包当作打招呼", scores: { abstract: 2, joker: 1 } },
-          { text: "如果看到感兴趣的话题，就直接加入讨论", scores: { debater: 3 } },
-          { text: "安静地待着，偶尔出来接个梗", scores: { repeater: 2, yinyang: 1 } }
-        ]
-      }, {
-        text: "你喜欢的Emoji组合更接近？",
-        options: [
-          { text: "😂🌻（开心+向日葵）", scores: { joker: 3 } },
-          { text: "🧐📚（思考+书籍）", scores: { thinker: 3 } },
-          { text: "🎉🐧（庆祝+企鹅，企鹅代表群居）", scores: { repeater: 2, abstract: 1 } },
-          { text: "🌸☕（花+咖啡，平和惬意）", scores: { normal: 3 } }
-        ]
-      }, {
-        text: "“哈哈哈哈哈哈”这句话你通常什么时候发？",
-        options: [
-          { text: "真的被逗笑了，开心地分享快乐", scores: { joker: 3 } },
-          { text: "配合别人的梗，烘托热闹氛围", scores: { abstract: 2, repeater: 1 } },
-          { text: "看到很幽默的评论，忍不住笑出声", scores: { normal: 2, joker: 1 } },
-          { text: "顺手发一串，表示已阅且友好", scores: { repeater: 3 } }
-        ]
-      }, {
-        text: "如果明天网络突然中断一整天，你最大的遗憾是？",
-        options: [
-          { text: "不能看最新的段子和有趣视频了", scores: { joker: 3 } },
-          { text: "手头正在研究的几个问题没法查资料了", scores: { thinker: 3 } },
-          { text: "不能和群友们默契地刷队形了", scores: { repeater: 3 } },
-          { text: "少了和朋友轻松聊天的乐趣，但也能用其他方式代替", scores: { normal: 3 } }
-        ]
-      }];
+            // ==================== Retina适配 ====================
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = LOGIC_WIDTH * dpr;
+            canvas.height = LOGIC_HEIGHT * dpr;
+            canvas.style.width = LOGIC_WIDTH + 'px';
+            canvas.style.height = LOGIC_HEIGHT + 'px';
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
 
-      // ---------- 状态管理 ----------
-      const state = {
-        screen: 'start',
-        currentQuestion: 0,
-        answers: new Array(QUESTIONS.length).fill(null),
-        scores: { normal: 0, joker: 0, thinker: 0, abstract: 0, repeater: 0, yinyang: 0, debater: 0 }
-      };
+            // ==================== 音效引擎 ====================
+            let audioCtx = null;
 
-      const container = document.getElementById('appContainer');
+            function initAudio() {
+                if (!audioCtx) {
+                    try {
+                        audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                    } catch (e) {
+                        audioCtx = null;
+                    }
+                }
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            }
 
-      function render() {
-        if (state.screen === 'start') renderStart();
-        else if (state.screen === 'question') renderQuestion();
-        else if (state.screen === 'result') renderResult();
-      }
+            function playTone(freq, duration, type = 'sine', volume = 0.15) {
+                if (!audioCtx) return;
+                try {
+                    const t = audioCtx.currentTime;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = type;
+                    osc.frequency.setValueAtTime(freq, t);
+                    gain.gain.setValueAtTime(volume, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(t);
+                    osc.stop(t + duration);
+                } catch (e) {
+                    // 静默处理
+                }
+            }
 
-      function renderStart() {
-        const html = `
-          <div class="screen start-screen" style="text-align:center;">
-            <span class="hero-icon">🍊</span>
-            <div class="title-section">
-              <div class="main-title">简中互联网测评</div>
-              <div class="subtitle">你是哪方大神？</div>
-            </div>
-            <div class="start-description">
-              15道趣味问题，发现你在网络世界的<span class="highlight">独特风格</span>。
-            </div>
-            <button class="btn btn-primary" id="startBtn">
-              🚀 开始测试
-            </button>
-            <p style="margin-top:1.4rem;font-size:0.8rem;color:#B08B6F;letter-spacing:0.02em;">
-              纯娱乐向 · 温和友好 · 无数据上传
-            </p>
-          </div>
-        `;
-        container.innerHTML = html;
-        document.getElementById('startBtn').addEventListener('click', () => {
-          state.screen = 'question';
-          state.currentQuestion = 0;
-          state.answers = new Array(QUESTIONS.length).fill(null);
-          resetScores();
-          render();
-        });
-      }
+            function playDragSound() { playTone(440, 0.05, 'sine', 0.1); }
 
-      function resetScores() {
-        state.scores = { normal: 0, joker: 0, thinker: 0, abstract: 0, repeater: 0, yinyang: 0, debater: 0 };
-      }
+            function playSuccessSound() {
+                playTone(880, 0.1, 'sine', 0.15);
+                setTimeout(() => playTone(660, 0.08, 'sine', 0.1), 50);
+            }
 
-      function calculateAllScores() {
-        resetScores();
-        state.answers.forEach((optIndex, qIndex) => {
-          if (optIndex === null) return;
-          const selectedOption = QUESTIONS[qIndex].options[optIndex];
-          for (let [key, value] of Object.entries(selectedOption.scores)) {
-            state.scores[key] = (state.scores[key] || 0) + value;
-          }
-        });
-      }
+            function playErrorSound() { playTone(220, 0.15, 'square', 0.12); }
 
-      function getTopPersona() {
-        let maxKey = 'normal';
-        let maxVal = -999;
-        for (let [key, val] of Object.entries(state.scores)) {
-          if (val > maxVal) {
-            maxVal = val;
-            maxKey = key;
-          }
-        }
-        return maxKey;
-      }
+            function playCelebrateSound() {
+                playTone(523, 0.1, 'sine', 0.18);
+                setTimeout(() => playTone(659, 0.1, 'sine', 0.18), 120);
+                setTimeout(() => playTone(784, 0.15, 'sine', 0.22), 240);
+            }
 
-      function selectOption(index) {
-        state.answers[state.currentQuestion] = index;
-        const options = document.querySelectorAll('.option-item');
-        options.forEach((opt, i) => {
-          if (i === index) opt.classList.add('selected');
-          else opt.classList.remove('selected');
-        });
-        const nextBtn = document.getElementById('nextBtn');
-        if (nextBtn) nextBtn.disabled = false;
-      }
+            function playStarSound() { playTone(1047, 0.06, 'sine', 0.08); }
 
-      function renderQuestion() {
-        const q = QUESTIONS[state.currentQuestion];
-        const total = QUESTIONS.length;
-        const current = state.currentQuestion + 1;
-        const progress = Math.round((state.currentQuestion / total) * 100);
-        const selectedAnswer = state.answers[state.currentQuestion];
+            // ==================== 游戏状态 ====================
+            const STATE = {
+                LOADING: 'loading',
+                MENU: 'menu',
+                PLAYING: 'playing',
+                LEVEL_COMPLETE: 'levelComplete',
+                ALL_COMPLETE: 'allComplete',
+                PAUSED: 'paused'
+            };
 
-        let optionsHtml = '';
-        q.options.forEach((opt, idx) => {
-          const letter = String.fromCharCode(65 + idx);
-          const selectedClass = (selectedAnswer === idx) ? 'selected' : '';
-          optionsHtml += `
-            <div class="option-item ${selectedClass}" data-option-index="${idx}">
-              <span class="option-letter">${letter}</span>
-              <span>${opt.text}</span>
-            </div>
-          `;
-        });
+            let gameState = STATE.MENU;
+            let currentLevelIndex = 0;
+            let timerSeconds = 0;
+            let timerInterval = null;
+            let isPaused = false;
+            let hintUsed = false;
+            let hintTargetId = null;
+            let hintStartTime = 0;
+            const HINT_DURATION = 3000; // 3秒
 
-        const html = `
-          <div class="screen question-screen">
-            <div class="title-section">
-              <div class="main-title" style="font-size:1.6rem;">🧪 简中互联网测评</div>
-            </div>
-            <div class="progress-wrapper">
-              <div class="progress-info">
-                <span>第 ${current}/${total} 题</span>
-                <span>${progress}%</span>
-              </div>
-              <div class="progress-bar-bg">
-                <div class="progress-fill" style="width:${progress}%;"></div>
-              </div>
-            </div>
-            <div class="question-card">
-              <div class="question-text">${q.text}</div>
-              <div class="options-grid" id="optionsContainer">
-                ${optionsHtml}
-              </div>
-            </div>
-            <div class="nav-buttons">
-              <button class="btn" id="prevBtn" ${state.currentQuestion === 0 ? 'disabled' : ''}>
-                ← 上一题
-              </button>
-              <span class="question-counter">${current}/${total}</span>
-              <button class="btn btn-primary" id="nextBtn" ${selectedAnswer === null ? 'disabled' : ''}>
-                ${state.currentQuestion === total - 1 ? '查看结果 🎉' : '下一题 →'}
-              </button>
-            </div>
-          </div>
-        `;
-        container.innerHTML = html;
+            // ==================== 粒子系统 ====================
+            let particles = [];
 
-        document.querySelectorAll('.option-item').forEach(item => {
-          item.addEventListener('click', function(e) {
-            const index = parseInt(this.dataset.optionIndex);
-            selectOption(index);
-          });
-        });
+            function spawnParticles(x, y, count = 8) {
+                const colors = ['#FF6A00', '#FFD700', '#FF4081', '#00E5FF', '#76FF03', '#FFEA00',
+                '#FFFFFF'];
+                for (let i = 0; i < count; i++) {
+                    const angle = (Math.PI * 2 / count) * i + Math.random() * 0.4;
+                    const speed = 2.5 + Math.random() * 5;
+                    particles.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        life: 1.0,
+                        decay: 0.015 + Math.random() * 0.03,
+                        size: 3 + Math.random() * 5,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    });
+                }
+            }
 
-        document.getElementById('prevBtn')?.addEventListener('click', () => {
-          if (state.currentQuestion > 0) {
-            state.currentQuestion--;
-            render();
-          }
-        });
+            function updateParticles() {
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life -= p.decay;
+                    p.vy += 0.05;
+                    if (p.life <= 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+            }
 
-        document.getElementById('nextBtn')?.addEventListener('click', () => {
-          if (state.currentQuestion < total - 1) {
-            state.currentQuestion++;
-            render();
-          } else {
-            calculateAllScores();
-            state.screen = 'result';
-            render();
-          }
-        });
-      }
+            function drawParticles(ctx) {
+                for (const p of particles) {
+                    ctx.save();
+                    ctx.globalAlpha = p.life;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    // 绘制小星星形状
+                    const cx = p.x;
+                    const cy = p.y;
+                    const s = p.size;
+                    const spikes = 5;
+                    const outerR = s;
+                    const innerR = s * 0.4;
+                    ctx.moveTo(cx, cy - outerR);
+                    for (let i = 1; i < spikes * 2; i++) {
+                        const r = i % 2 === 0 ? outerR : innerR;
+                        const angle = (Math.PI * 2 / (spikes * 2)) * i - Math.PI / 2;
+                        ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    // 光晕
+                    ctx.globalAlpha = p.life * 0.4;
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, s * 0.7, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
 
-      function renderResult() {
-        const personaKey = getTopPersona();
-        const persona = PERSONAS[personaKey];
-        const maxScore = Math.max(...Object.values(state.scores), 1);
-        const dimensionList = [
-          { key: 'normal', label: '🌿 温和', val: state.scores.normal },
-          { key: 'joker', label: '😄 欢乐', val: state.scores.joker },
-          { key: 'thinker', label: '🔍 深度', val: state.scores.thinker },
-          { key: 'abstract', label: '🎨 抽象', val: state.scores.abstract },
-          { key: 'repeater', label: '🦜 队形', val: state.scores.repeater },
-          { key: 'yinyang', label: '😏 反讽', val: state.scores.yinyang },
-          { key: 'debater', label: '💬 辩论', val: state.scores.debater }
-        ];
+            // ==================== 芒果崽类 ====================
+            class MangoZai {
+                constructor(x, y, scale = 1) {
+                    this.baseX = x;
+                    this.baseY = y;
+                    this.x = x;
+                    this.y = y;
+                    this.scale = scale;
+                    this.floatOffset = 0;
+                    this.floatSpeed = 0.03;
+                    this.floatAmplitude = 8;
+                    this.isCelebrating = false;
+                    this.celebrateTimer = 0;
+                    this.celebrateDuration = 1.5;
+                    this.rotation = 0;
+                    this.bounceY = 0;
+                }
 
-        let dimensionBars = '';
-        dimensionList.forEach(d => {
-          const percent = Math.round((d.val / maxScore) * 100);
-          const barColor = d.key === 'normal' ?
-            'linear-gradient(90deg, #5B9F5F, #7CBF7C)' :
-            'linear-gradient(90deg, #FF8C42, #FFB347)';
-          dimensionBars += `
-            <div class="dimension-row">
-              <span class="dimension-label">${d.label}</span>
-              <div class="dimension-bar-bg">
-                <div class="dimension-bar-fill" style="width:${percent}%; background:${barColor};"></div>
-              </div>
-              <span class="dimension-score">${d.val}</span>
-            </div>
-          `;
-        });
+                update(dt) {
+                    if (this.isCelebrating) {
+                        this.celebrateTimer += dt;
+                        if (this.celebrateTimer > this.celebrateDuration) {
+                            this.isCelebrating = false;
+                            this.celebrateTimer = 0;
+                            this.rotation = 0;
+                            this.bounceY = 0;
+                        } else {
+                            const t = this.celebrateTimer;
+                            const freq = 8;
+                            this.rotation = Math.sin(t * freq * Math.PI) * 0.35 * (1 - t / this
+                                .celebrateDuration);
+                            this.bounceY = -Math.abs(Math.sin(t * freq * 0.7 * Math.PI)) * 60 * (1 - t / this
+                                .celebrateDuration);
+                            this.floatOffset = 0;
+                        }
+                    } else {
+                        this.floatOffset = Math.sin(Date.now() * this.floatSpeed) * this.floatAmplitude;
+                        this.rotation = 0;
+                        this.bounceY = 0;
+                    }
+                    this.x = this.baseX;
+                    this.y = this.baseY + this.floatOffset + this.bounceY;
+                }
 
-        const html = `
-          <div class="screen result-screen">
-            <div class="title-section">
-              <div style="font-size:3.8rem;">${persona.emoji}</div>
-              <div class="result-type" style="color:${personaKey === 'normal' ? '#5B9F5F' : '#FF8C42'};">${persona.name}</div>
-              <div class="subtitle">你的互联网风格鉴定</div>
-            </div>
-            <div class="result-core" style="${personaKey === 'normal' ? 'border-color:#A3D9A3; background:#F2FAF2;' : ''}">
-              “${persona.core}”
-            </div>
-            <div class="result-detail">
-              ${persona.description}
-            </div>
-            <div style="margin:1.5rem 0 0.8rem;">
-              <h4 style="color:#713F12;margin-bottom:0.8rem;font-weight:600;">📊 维度分析</h4>
-              ${dimensionBars}
-            </div>
-            <div class="tag-group">
-              <span class="tag" style="${personaKey === 'normal' ? 'background:#E8F5E8;color:#3B6E3B;border-color:#A3D9A3;' : ''}">${persona.emoji} ${persona.name}认证</span>
-              <span class="tag">纯娱乐向</span>
-              <span class="tag">温和友好</span>
-            </div>
-            <div style="display:flex;gap:1rem;margin-top:1.8rem;justify-content:center;flex-wrap:wrap;">
-              <button class="btn" id="restartBtn">🔄 重新测试</button>
-              <button class="btn btn-primary" id="shareBtn">📋 复制结果文案</button>
-            </div>
-            <p style="text-align:center;margin-top:1.2rem;font-size:0.78rem;color:#B08B6F;">
-              本测试纯属娱乐，不代表任何科学依据。<br>你是独一无二的，别被标签定义。
-            </p>
-          </div>
-        `;
-        container.innerHTML = html;
+                triggerCelebrate() {
+                    this.isCelebrating = true;
+                    this.celebrateTimer = 0;
+                    this.floatOffset = 0;
+                }
 
-        document.getElementById('restartBtn').addEventListener('click', () => {
-          state.screen = 'start';
-          state.currentQuestion = 0;
-          state.answers = new Array(QUESTIONS.length).fill(null);
-          resetScores();
-          render();
-        });
+                draw(ctx) {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation);
+                    const s = this.scale;
 
-        document.getElementById('shareBtn').addEventListener('click', () => {
-          const shareText = `【简中互联网测评】\n我的风格是：${persona.emoji} ${persona.name}\n核心信条：${persona.core}\n测测你是什么风格？👉 [链接]`;
-          navigator.clipboard.writeText(shareText).then(() => {
-            alert('结果文案已复制到剪贴板！快去发给朋友吧～');
-          }).catch(() => {
-            prompt('手动复制以下文案分享给朋友：', shareText);
-          });
-        });
-      }
+                    // 身体阴影
+                    ctx.fillStyle = 'rgba(0,0,0,0.08)';
+                    ctx.beginPath();
+                    ctx.ellipse(0, 3 * s, 22 * s, 30 * s, 0, 0, Math.PI * 2);
+                    ctx.fill();
 
-      render();
-    })();
-  </script>
+                    // 身体 - 芒果形状（圆润椭圆，底部稍尖）
+                    const bodyGrad = ctx.createLinearGradient(0, -28 * s, 0, 30 * s);
+                    bodyGrad.addColorStop(0, '#FF9A3C');
+                    bodyGrad.addColorStop(0.4, '#FF6A00');
+                    bodyGrad.addColorStop(0.75, '#FF7B1A');
+                    bodyGrad.addColorStop(1, '#E85D00');
+                    ctx.fillStyle = bodyGrad;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -28 * s);
+                    ctx.bezierCurveTo(22 * s, -28 * s, 24 * s, -8 * s, 22 * s, 14 * s);
+                    ctx.bezierCurveTo(20 * s, 28 * s, 8 * s, 32 * s, 0, 30 * s);
+                    ctx.bezierCurveTo(-8 * s, 32 * s, -20 * s, 28 * s, -22 * s, 14 * s);
+                    ctx.bezierCurveTo(-24 * s, -8 * s, -22 * s, -28 * s, 0, -28 * s);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    // 身体高光
+                    const highlightGrad = ctx.createLinearGradient(-10 * s, -20 * s, 8 * s, 5 * s);
+                    highlightGrad.addColorStop(0, 'rgba(255,255,255,0.35)');
+                    highlightGrad.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.fillStyle = highlightGrad;
+                    ctx.beginPath();
+                    ctx.ellipse(-3 * s, -10 * s, 8 * s, 14 * s, -0.3, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // 叶子
+                    ctx.fillStyle = '#4CAF50';
+                    ctx.beginPath();
+                    ctx.moveTo(0, -27 * s);
+                    ctx.bezierCurveTo(-6 * s, -38 * s, -16 * s, -42 * s, -18 * s, -36 * s);
+                    ctx.bezierCurveTo(-19 * s, -30 * s, -8 * s, -28 * s, 0, -27 * s);
+                    ctx.closePath();
+                    ctx.fill();
+                    // 叶子亮面
+                    ctx.fillStyle = '#66BB6A';
+                    ctx.beginPath();
+                    ctx.moveTo(0, -27 * s);
+                    ctx.bezierCurveTo(-4 * s, -34 * s, -10 * s, -38 * s, -12 * s, -34 * s);
+                    ctx.bezierCurveTo(-13 * s, -30 * s, -5 * s, -28 * s, 0, -27 * s);
+                    ctx.closePath();
+                    ctx.fill();
+                    // 小叶脉
+                    ctx.strokeStyle = '#388E3C';
+                    ctx.lineWidth = 0.6 * s;
+                    ctx.beginPath();
+                    ctx.moveTo(-3 * s, -28 * s);
+                    ctx.quadraticCurveTo(-8 * s, -33 * s, -13 * s, -35 * s);
+                    ctx.stroke();
+
+                    // 眼睛 - 白色
+                    const eyeY = -8 * s;
+                    // 左眼
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.arc(-7 * s, eyeY, 8 * s, 0, Math.PI * 2);
+                    ctx.fill();
+                    // 右眼
+                    ctx.beginPath();
+                    ctx.arc(7 * s, eyeY, 8 * s, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // 瞳孔
+                    ctx.fillStyle = '#1a1a1a';
+                    ctx.beginPath();
+                    ctx.arc(-6 * s, eyeY + 1 * s, 3.8 * s, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(8 * s, eyeY + 1 * s, 3.8 * s, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // 眼睛高光
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.arc(-4 * s, eyeY - 2.5 * s, 2 * s, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(10 * s, eyeY - 2.5 * s, 2 * s, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // 微笑
+                    ctx.strokeStyle = '#5D3A1A';
+                    ctx.lineWidth = 1.8 * s;
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.arc(0, eyeY + 3 * s, 9 * s, 0.15 * Math.PI, 0.85 * Math.PI);
+                    ctx.stroke();
+
+                    // 腮红
+                    ctx.fillStyle = 'rgba(255,150,150,0.5)';
+                    ctx.beginPath();
+                    ctx.ellipse(-14 * s, eyeY + 6 * s, 5 * s, 3.5 * s, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(14 * s, eyeY + 6 * s, 5 * s, 3.5 * s, 0, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.restore();
+                }
+            }
+
+            // ==================== 物品类 ====================
+            class Item {
+                constructor(id, name, shape, dimensions, color, gradientColors, initX, initY, drawDetails) {
+                    this.id = id;
+                    this.name = name;
+                    this.shape = shape; // 'rect' | 'circle' | 'polygon'
+                    this.dimensions = dimensions; // {w, h} for rect, {r} for circle, {vertices: [[x,y],...]} for polygon
+                    this.color = color;
+                    this.gradientColors = gradientColors || null;
+                    this.initX = initX;
+                    this.initY = initY;
+                    this.x = initX;
+                    this.y = initY;
+                    this.targetX = 0;
+                    this.targetY = 0;
+                    this.isPlaced = false;
+                    this.isDragging = false;
+                    this.drawDetails = drawDetails || {}; // 额外的绘制细节
+                    this.scaleBoost = 1.0;
+                    this.alpha = 1.0;
+                }
+
+                getCenterX() { return this.x; }
+                getCenterY() { return this.y; }
+
+                getBounds() {
+                    if (this.shape === 'rect') {
+                        const w = this.dimensions.w;
+                        const h = this.dimensions.h;
+                        return { left: this.x - w / 2, top: this.y - h / 2, right: this.x + w / 2, bottom: this
+                                .y + h / 2 };
+                    } else if (this.shape === 'circle') {
+                        const r = this.dimensions.r;
+                        return { left: this.x - r, top: this.y - r, right: this.x + r, bottom: this.y + r };
+                    } else if (this.shape === 'polygon') {
+                        const verts = this.dimensions.vertices;
+                        let minX = Infinity,
+                            minY = Infinity,
+                            maxX = -Infinity,
+                            maxY = -Infinity;
+                        for (const v of verts) {
+                            const vx = this.x + v[0];
+                            const vy = this.y + v[1];
+                            if (vx < minX) minX = vx;
+                            if (vy < minY) minY = vy;
+                            if (vx > maxX) maxX = vx;
+                            if (vy > maxY) maxY = vy;
+                        }
+                        return { left: minX, top: minY, right: maxX, bottom: maxY };
+                    }
+                    return { left: this.x - 15, top: this.y - 15, right: this.x + 15, bottom: this.y + 15 };
+                }
+
+                containsPoint(px, py) {
+                    if (this.shape === 'rect') {
+                        const w = this.dimensions.w / 2;
+                        const h = this.dimensions.h / 2;
+                        return px >= this.x - w && px <= this.x + w && py >= this.y - h && py <= this.y + h;
+                    } else if (this.shape === 'circle') {
+                        const r = this.dimensions.r;
+                        const dx = px - this.x;
+                        const dy = py - this.y;
+                        return dx * dx + dy * dy <= r * r;
+                    } else if (this.shape === 'polygon') {
+                        const verts = this.dimensions.vertices;
+                        const n = verts.length;
+                        let inside = false;
+                        for (let i = 0, j = n - 1; i < n; j = i++) {
+                            const xi = this.x + verts[i][0];
+                            const yi = this.y + verts[i][1];
+                            const xj = this.x + verts[j][0];
+                            const yj = this.y + verts[j][1];
+                            if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) {
+                                inside = !inside;
+                            }
+                        }
+                        return inside;
+                    }
+                    return false;
+                }
+
+                draw(ctx, isHinted = false) {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    const s = this.isDragging ? 1.05 : this.scaleBoost;
+                    ctx.scale(s, s);
+                    ctx.globalAlpha = this.isDragging ? 0.88 : this.alpha;
+
+                    // 阴影
+                    if (!this.isPlaced) {
+                        ctx.fillStyle = 'rgba(0,0,0,0.12)';
+                        ctx.beginPath();
+                        if (this.shape === 'circle') {
+                            ctx.arc(2, 2, this.dimensions.r, 0, Math.PI * 2);
+                        } else if (this.shape === 'rect') {
+                            const w = this.dimensions.w;
+                            const h = this.dimensions.h;
+                            ctx.roundRect ? ctx.roundRect(-w / 2 + 2, -h / 2 + 2, w, h, 4) : ctx.rect(-w / 2 + 2, -h /
+                                2 + 2, w, h);
+                        } else {
+                            const verts = this.dimensions.vertices;
+                            ctx.moveTo(verts[0][0] + 2, verts[0][1] + 2);
+                            for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0] + 2, verts[i][1] + 2);
+                            ctx.closePath();
+                        }
+                        ctx.fill();
+                    }
+
+                    // 主体
+                    let fillStyle = this.color;
+                    if (this.gradientColors && this.shape === 'rect') {
+                        const grad = ctx.createLinearGradient(0, -this.dimensions.h / 2, 0, this.dimensions.h / 2);
+                        grad.addColorStop(0, this.gradientColors[0]);
+                        grad.addColorStop(1, this.gradientColors[1]);
+                        fillStyle = grad;
+                    }
+                    ctx.fillStyle = fillStyle;
+
+                    if (this.shape === 'rect') {
+                        const w = this.dimensions.w;
+                        const h = this.dimensions.h;
+                        ctx.beginPath();
+                        if (ctx.roundRect) {
+                            ctx.roundRect(-w / 2, -h / 2, w, h, 5);
+                        } else {
+                            ctx.rect(-w / 2, -h / 2, w, h);
+                        }
+                        ctx.fill();
+                        // 边框
+                        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                        ctx.lineWidth = 1.2;
+                        ctx.stroke();
+                        // 高光
+                        const hlGrad = ctx.createLinearGradient(0, -h / 2, 0, h / 2);
+                        hlGrad.addColorStop(0, 'rgba(255,255,255,0.3)');
+                        hlGrad.addColorStop(0.5, 'rgba(255,255,255,0)');
+                        hlGrad.addColorStop(1, 'rgba(0,0,0,0.05)');
+                        ctx.fillStyle = hlGrad;
+                        ctx.fill();
+                    } else if (this.shape === 'circle') {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.dimensions.r, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                        ctx.lineWidth = 1.2;
+                        ctx.stroke();
+                        const hlGrad = ctx.createRadialGradient(-this.dimensions.r * 0.25, -this.dimensions.r * 0.25,
+                            this.dimensions.r * 0.1, 0, 0, this.dimensions.r);
+                        hlGrad.addColorStop(0, 'rgba(255,255,255,0.4)');
+                        hlGrad.addColorStop(1, 'rgba(255,255,255,0)');
+                        ctx.fillStyle = hlGrad;
+                        ctx.fill();
+                    } else if (this.shape === 'polygon') {
+                        const verts = this.dimensions.vertices;
+                        ctx.beginPath();
+                        ctx.moveTo(verts[0][0], verts[0][1]);
+                        for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0], verts[i][1]);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                        ctx.lineWidth = 1.2;
+                        ctx.stroke();
+                    }
+
+                    // 提示高亮
+                    if (isHinted) {
+                        const pulse = 0.5 + 0.5 * Math.sin(Date.now() * 0.015);
+                        ctx.strokeStyle = `rgba(255,215,0,${0.6 + pulse * 0.4})`;
+                        ctx.lineWidth = 3 + pulse * 3;
+                        ctx.setLineDash([4, 3]);
+                        if (this.shape === 'rect') {
+                            const w = this.dimensions.w;
+                            const h = this.dimensions.h;
+                            ctx.beginPath();
+                            ctx.rect(-w / 2 - 3, -h / 2 - 3, w + 6, h + 6);
+                            ctx.stroke();
+                        } else if (this.shape === 'circle') {
+                            ctx.beginPath();
+                            ctx.arc(0, 0, this.dimensions.r + 4, 0, Math.PI * 2);
+                            ctx.stroke();
+                        } else {
+                            const verts = this.dimensions.vertices;
+                            ctx.beginPath();
+                            ctx.moveTo(verts[0][0] - 3, verts[0][1] - 3);
+                            for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0] - 3, verts[i][1] - 3);
+                            ctx.closePath();
+                            ctx.stroke();
+                        }
+                        ctx.setLineDash([]);
+                    }
+
+                    // 成功放置后的闪光环
+                    if (this.isPlaced && this.scaleBoost > 1.0) {
+                        const ringAlpha = (this.scaleBoost - 1.0) * 5;
+                        ctx.strokeStyle = `rgba(255,255,255,${Math.min(ringAlpha, 0.8)})`;
+                        ctx.lineWidth = 3;
+                        if (this.shape === 'rect') {
+                            const w = this.dimensions.w + 8;
+                            const h = this.dimensions.h + 8;
+                            ctx.beginPath();
+                            ctx.rect(-w / 2, -h / 2, w, h);
+                            ctx.stroke();
+                        } else if (this.shape === 'circle') {
+                            ctx.beginPath();
+                            ctx.arc(0, 0, this.dimensions.r + 5, 0, Math.PI * 2);
+                            ctx.stroke();
+                        }
+                    }
+
+                    // 绘制物品上的细节
+                    if (this.drawDetails && this.drawDetails.type) {
+                        this.drawItemDetails(ctx);
+                    }
+
+                    ctx.restore();
+                }
+
+                drawItemDetails(ctx) {
+                    const dd = this.drawDetails;
+                    if (dd.type === 'lipstick') {
+                        // 金色底座
+                        ctx.fillStyle = '#D4A843';
+                        const bw = (this.dimensions.w || 16) * 0.7;
+                        ctx.fillRect(-bw / 2, (this.dimensions.h || 40) / 2 - 7, bw, 7);
+                        ctx.fillStyle = '#C4963A';
+                        ctx.fillRect(-bw / 2 + 1, (this.dimensions.h || 40) / 2 - 6, bw - 2, 2);
+                    } else if (dd.type === 'eyeshadow') {
+                        const w = this.dimensions.w || 34;
+                        const h = this.dimensions.h || 24;
+                        const cols = ['#F8BBD0', '#CE93D8', '#90CAF9', '#A5D6A7'];
+                        const cellW = w / 4 - 1;
+                        const cellH = h / 2 - 1;
+                        for (let r = 0; r < 2; r++) {
+                            for (let c = 0; c < 4; c++) {
+                                ctx.fillStyle = cols[(r * 4 + c) % cols.length];
+                                ctx.fillRect(-w / 2 + 2 + c * (cellW + 1), -h / 2 + 2 + r * (cellH + 1), cellW,
+                                    cellH);
+                            }
+                        }
+                    } else if (dd.type === 'brush') {
+                        ctx.fillStyle = '#E8D5C4';
+                        ctx.fillRect(-3, -(this.dimensions.h || 44) / 2, 6, (this.dimensions.h || 44) * 0.55);
+                        ctx.fillStyle = '#C9A88C';
+                        ctx.fillRect(-2.5, -(this.dimensions.h || 44) / 2 + (this.dimensions.h || 44) * 0.55, 5, (
+                            this.dimensions.h || 44) * 0.2);
+                    } else if (dd.type === 'drink') {
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.font = 'bold 7px "PingFang SC","Microsoft YaHei",sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('芒果', 0, 1);
+                        // 迷你芒果崽头像
+                        ctx.fillStyle = MANGO_ORANGE;
+                        ctx.beginPath();
+                        ctx.arc(0, -6, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = '#4CAF50';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -10);
+                        ctx.lineTo(-2, -7);
+                        ctx.lineTo(2, -7);
+                        ctx.closePath();
+                        ctx.fill();
+                    } else if (dd.type === 'camera') {
+                        ctx.fillStyle = '#333';
+                        ctx.fillRect(-6, -3, 12, 8);
+                        ctx.fillStyle = '#555';
+                        ctx.beginPath();
+                        ctx.arc(0, -4, 5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = '#222';
+                        ctx.beginPath();
+                        ctx.arc(0, -4, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else if (dd.type === 'passport') {
+                        ctx.fillStyle = '#1a3a5c';
+                        ctx.fillRect(-8, -5, 16, 10);
+                        ctx.fillStyle = '#D4A843';
+                        ctx.fillRect(-3, -2, 6, 4);
+                    }
+                }
+
+                reset() {
+                    this.x = this.initX;
+                    this.y = this.initY;
+                    this.isPlaced = false;
+                    this.isDragging = false;
+                    this.scaleBoost = 1.0;
+                    this.alpha = 1.0;
+                }
+
+                placeAt(tx, ty) {
+                    this.targetX = tx;
+                    this.targetY = ty;
+                    this.x = tx;
+                    this.y = ty;
+                    this.isPlaced = true;
+                    this.isDragging = false;
+                    this.scaleBoost = 1.15;
+                }
+
+                update() {
+                    if (this.isPlaced && this.scaleBoost > 1.0) {
+                        this.scaleBoost += (1.0 - this.scaleBoost) * 0.2;
+                        if (Math.abs(this.scaleBoost - 1.0) < 0.002) this.scaleBoost = 1.0;
+                    }
+                }
+            }
+
+            // ==================== 收纳框类（虚线框）====================
+            class SlotBox {
+                constructor(id, itemId, shape, dimensions, targetX, targetY) {
+                    this.id = id;
+                    this.itemId = itemId;
+                    this.shape = shape;
+                    this.dimensions = dimensions;
+                    this.targetX = targetX;
+                    this.targetY = targetY;
+                    this.isOccupied = false;
+                }
+
+                getCenterX() { return this.targetX; }
+                getCenterY() { return this.targetY; }
+
+                draw(ctx) {
+                    ctx.save();
+                    ctx.translate(this.targetX, this.targetY);
+
+                    // 半透明填充
+                    ctx.fillStyle = this.isOccupied ? 'rgba(180,220,180,0.35)' : 'rgba(200,200,210,0.3)';
+                    ctx.setLineDash([7, 3]);
+                    ctx.lineDashOffset = Date.now() * 0.03;
+                    ctx.strokeStyle = this.isOccupied ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.85)';
+                    ctx.lineWidth = 2;
+
+                    if (this.shape === 'rect') {
+                        const w = this.dimensions.w;
+                        const h = this.dimensions.h;
+                        ctx.beginPath();
+                        if (ctx.roundRect) {
+                            ctx.roundRect(-w / 2, -h / 2, w, h, 5);
+                        } else {
+                            ctx.rect(-w / 2, -h / 2, w, h);
+                        }
+                        ctx.fill();
+                        ctx.stroke();
+                    } else if (this.shape === 'circle') {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.dimensions.r, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.stroke();
+                    } else if (this.shape === 'polygon') {
+                        const verts = this.dimensions.vertices;
+                        ctx.beginPath();
+                        ctx.moveTo(verts[0][0], verts[0][1]);
+                        for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0], verts[i][1]);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.stroke();
+                    }
+
+                    // 图标提示
+                    if (!this.isOccupied) {
+                        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                        ctx.setLineDash([]);
+                        const iconSize = Math.min(
+                            this.shape === 'circle' ? this.dimensions.r * 0.6 :
+                            this.shape === 'rect' ? Math.min(this.dimensions.w, this.dimensions.h) * 0.35 :
+                            10,
+                            14
+                        );
+                        ctx.beginPath();
+                        ctx.arc(0, 0, iconSize * 0.7, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = 'rgba(180,180,190,0.7)';
+                        ctx.beginPath();
+                        ctx.arc(0, -iconSize * 0.1, iconSize * 0.35, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    ctx.setLineDash([]);
+                    ctx.restore();
+                }
+            }
+
+            // ==================== 关卡数据 ====================
+            function buildLevel1() {
+                // 乘风化妆台 - 化妆收纳盒
+                const items = [
+                    new Item('lipstick1', '口红', 'rect', { w: 16, h: 44 }, '#E85D75', ['#FF6B8A', '#D94460'], 55, 95, {
+                        type: 'lipstick' }),
+                    new Item('eyeshadow1', '眼影盘', 'rect', { w: 38, h: 26 }, '#3D2B3D', ['#4A3548', '#2D1E2A'], 200, 80, {
+                        type: 'eyeshadow' }),
+                    new Item('powder1', '粉饼盒', 'circle', { r: 17 }, '#F5E6D8', null, 320, 100, { type: 'powder' }),
+                    new Item('brush1', '化妆刷', 'rect', { w: 10, h: 48 }, '#E8D5C4', ['#F0E0D0', '#D4BBA5'], 120, 140, {
+                        type: 'brush' }),
+                    new Item('nailpolish1', '指甲油', 'rect', { w: 14, h: 30 }, '#FF8A80', ['#FF9E95', '#E57373'], 280, 130,
+                        { type: 'nailpolish' }),
+                    new Item('perfume1', '香水瓶', 'rect', { w: 20, h: 36 }, '#B8E0F0', ['#D4EEF8', '#8CC8E0'], 60, 170, {
+                        type: 'perfume' }),
+                    new Item('mascara1', '睫毛膏', 'rect', { w: 12, h: 40 }, '#4A4A5A', ['#5C5C6E', '#333344'], 330, 170, {
+                        type: 'mascara' }),
+                    new Item('blush1', '腮红盒', 'circle', { r: 15 }, '#FFB3BA', null, 180, 175, { type: 'blush' }),
+                ];
+
+                // 目标虚线框排列在化妆收纳盒内
+                const slotLayouts = [
+                    { itemId: 'lipstick1', tx: 105, ty: 445, shape: 'rect', dim: { w: 16, h: 44 } },
+                    { itemId: 'eyeshadow1', tx: 220, ty: 440, shape: 'rect', dim: { w: 38, h: 26 } },
+                    { itemId: 'powder1', tx: 310, ty: 445, shape: 'circle', dim: { r: 17 } },
+                    { itemId: 'brush1', tx: 80, ty: 510, shape: 'rect', dim: { w: 10, h: 48 } },
+                    { itemId: 'nailpolish1', tx: 155, ty: 505, shape: 'rect', dim: { w: 14, h: 30 } },
+                    { itemId: 'perfume1', tx: 230, ty: 510, shape: 'rect', dim: { w: 20, h: 36 } },
+                    { itemId: 'mascara1', tx: 310, ty: 510, shape: 'rect', dim: { w: 12, h: 40 } },
+                    { itemId: 'blush1', tx: 155, ty: 565, shape: 'circle', dim: { r: 15 } },
+                ];
+
+                const slots = slotLayouts.map((sl, i) =>
+                    new SlotBox('slot1_' + i, sl.itemId, sl.shape, sl.dim, sl.tx, sl.ty)
+                );
+
+                return {
+                    sceneName: '乘风化妆台',
+                    showName: '乘风破浪的姐姐',
+                    bgColor: '#FFF5F0',
+                    bgAccent: '#FFE0D0',
+                    items: items,
+                    slots: slots,
+                    decorationType: 'dressingTable',
+                };
+            }
+
+            function buildLevel2() {
+                // 花儿与少年旅行箱
+                const items = [
+                    new Item('clothes1', '衣服卷', 'rect', { w: 28, h: 22 }, '#7EB8DA', ['#96CCE8', '#5A9DC0'], 50, 90, {
+                        type: 'clothes' }),
+                    new Item('shoes1', '运动鞋', 'polygon', {
+                        vertices: [
+                            [-16, -8],
+                            [16, -8],
+                            [14, 2],
+                            [10, 8],
+                            [-6, 8],
+                            [-12, 2]
+                        ]
+                    }, '#E8E0D8', null, 200, 85, { type: 'shoes' }),
+                    new Item('camera1', '相机', 'rect', { w: 24, h: 18 }, '#4A4A4A', ['#5C5C5C', '#333333'], 320, 95, {
+                        type: 'camera' }),
+                    new Item('passport1', '护照夹', 'rect', { w: 20, h: 14 }, '#1a3a5c', ['#234B78', '#0F2840'], 100, 145, {
+                        type: 'passport' }),
+                    new Item('hat1', '遮阳帽', 'circle', { r: 18 }, '#F9D56E', null, 260, 140, { type: 'hat' }),
+                    new Item('sunglasses1', '太阳镜', 'rect', { w: 30, h: 12 }, '#3D3D3D', ['#4F4F4F', '#2A2A2A'], 55, 180, {
+                        type: 'sunglasses' }),
+                    new Item('sunscreen1', '防晒霜', 'rect', { w: 14, h: 28 }, '#FFF9E6', ['#FFFFFF', '#F5ECD7'], 330, 170, {
+                        type: 'sunscreen' }),
+                    new Item('socks1', '袜子卷', 'circle', { r: 12 }, '#C9E4CA', null, 185, 185, { type: 'socks' }),
+                ];
+
+                const slotLayouts2 = [
+                    { itemId: 'clothes1', tx: 90, ty: 440, shape: 'rect', dim: { w: 28, h: 22 } },
+                    { itemId: 'shoes1', tx: 200, ty: 445, shape: 'polygon', dim: { vertices: [
+                            [-16, -8],
+                            [16, -8],
+                            [14, 2],
+                            [10, 8],
+                            [-6, 8],
+                            [-12, 2]
+                        ] } },
+                    { itemId: 'camera1', tx: 310, ty: 440, shape: 'rect', dim: { w: 24, h: 18 } },
+                    { itemId: 'passport1', tx: 85, ty: 500, shape: 'rect', dim: { w: 20, h: 14 } },
+                    { itemId: 'hat1', tx: 170, ty: 500, shape: 'circle', dim: { r: 18 } },
+                    { itemId: 'sunglasses1', tx: 260, ty: 500, shape: 'rect', dim: { w: 30, h: 12 } },
+                    { itemId: 'sunscreen1', tx: 330, ty: 500, shape: 'rect', dim: { w: 14, h: 28 } },
+                    { itemId: 'socks1', tx: 130, ty: 555, shape: 'circle', dim: { r: 12 } },
+                ];
+
+                const slots = slotLayouts2.map((sl, i) =>
+                    new SlotBox('slot2_' + i, sl.itemId, sl.shape, sl.dim, sl.tx, sl.ty)
+                );
+
+                return {
+                    sceneName: '花儿与少年旅行箱',
+                    showName: '花儿与少年',
+                    bgColor: '#F5FAFF',
+                    bgAccent: '#D8ECFF',
+                    items: items,
+                    slots: slots,
+                    decorationType: 'suitcase',
+                };
+            }
+
+            function buildLevel3() {
+                // 蘑菇屋冰箱
+                const items = [
+                    new Item('drink1', '芒果饮料', 'rect', { w: 16, h: 38 }, '#FF9A3C', ['#FFB366', '#FF7B1A'], 50, 90, {
+                        type: 'drink' }),
+                    new Item('bento1', '便当盒', 'rect', { w: 32, h: 20 }, '#F5F5F5', ['#FFFFFF', '#E0E0E0'], 210, 80, {
+                        type: 'bento' }),
+                    new Item('yogurt1', '酸奶杯', 'rect', { w: 18, h: 28 }, '#FEFEFE', ['#FFFFFF', '#E8E8F0'], 330, 95, {
+                        type: 'yogurt' }),
+                    new Item('fruit1', '水果盘', 'circle', { r: 20 }, '#FFF8E7', null, 100, 130, { type: 'fruit' }),
+                    new Item('eggbox1', '鸡蛋盒', 'rect', { w: 30, h: 16 }, '#F5ECD7', ['#FAF3E3', '#E8DCC4'], 260, 135, {
+                        type: 'eggbox' }),
+                    new Item('veggie1', '蔬菜', 'polygon', {
+                        vertices: [
+                            [-10, -16],
+                            [8, -14],
+                            [14, -4],
+                            [10, 10],
+                            [-6, 12],
+                            [-14, 2]
+                        ]
+                    }, '#7CB342', null, 55, 180, { type: 'veggie' }),
+                    new Item('juice1', '果汁盒', 'rect', { w: 16, h: 30 }, '#FFCC80', ['#FFDBA3', '#FFB74D'], 330, 175, {
+                        type: 'juice' }),
+                    new Item('icecream1', '冰淇淋', 'rect', { w: 14, h: 32 }, '#FFE0E0', ['#FFF0F0', '#FFC8C8'], 185, 175, {
+                        type: 'icecream' }),
+                ];
+
+                const slotLayouts3 = [
+                    { itemId: 'drink1', tx: 85, ty: 438, shape: 'rect', dim: { w: 16, h: 38 } },
+                    { itemId: 'bento1', tx: 200, ty: 435, shape: 'rect', dim: { w: 32, h: 20 } },
+                    { itemId: 'yogurt1', tx: 315, ty: 440, shape: 'rect', dim: { w: 18, h: 28 } },
+                    { itemId: 'fruit1', tx: 100, ty: 500, shape: 'circle', dim: { r: 20 } },
+                    { itemId: 'eggbox1', tx: 220, ty: 495, shape: 'rect', dim: { w: 30, h: 16 } },
+                    { itemId: 'veggie1', tx: 310, ty: 505, shape: 'polygon', dim: { vertices: [
+                            [-10, -16],
+                            [8, -14],
+                            [14, -4],
+                            [10, 10],
+                            [-6, 12],
+                            [-14, 2]
+                        ] } },
+                    { itemId: 'juice1', tx: 100, ty: 555, shape: 'rect', dim: { w: 16, h: 30 } },
+                    { itemId: 'icecream1', tx: 200, ty: 558, shape: 'rect', dim: { w: 14, h: 32 } },
+                ];
+
+                const slots = slotLayouts3.map((sl, i) =>
+                    new SlotBox('slot3_' + i, sl.itemId, sl.shape, sl.dim, sl.tx, sl.ty)
+                );
+
+                return {
+                    sceneName: '蘑菇屋冰箱',
+                    showName: '向往的生活',
+                    bgColor: '#F8FFF8',
+                    bgAccent: '#D8F0D8',
+                    items: items,
+                    slots: slots,
+                    decorationType: 'fridge',
+                };
+            }
+
+            const levelBuilders = [buildLevel1, buildLevel2, buildLevel3];
+            let currentLevelData = null;
+
+            function loadLevel(index) {
+                currentLevelData = levelBuilders[index]();
+                currentLevelIndex = index;
+                timerSeconds = 0;
+                isPaused = false;
+                hintUsed = false;
+                hintTargetId = null;
+                hintStartTime = 0;
+                particles = [];
+                // 重置所有物品
+                for (const item of currentLevelData.items) {
+                    item.reset();
+                }
+                // 重置所有虚线框
+                for (const slot of currentLevelData.slots) {
+                    slot.isOccupied = false;
+                }
+                // 随机微调物品初始位置避免完全重叠
+                randomizeItemPositions();
+                gameState = STATE.PLAYING;
+                startTimer();
+            }
+
+            function randomizeItemPositions() {
+                const items = currentLevelData.items;
+                const occupiedRects = [];
+                for (const item of items) {
+                    let attempts = 0;
+                    let placed = false;
+                    while (attempts < 30 && !placed) {
+                        const bx = item.initX + (Math.random() - 0.5) * 40;
+                        const by = item.initY + (Math.random() - 0.5) * 30;
+                        const bxMin = Math.max(25, Math.min(375, bx));
+                        const byMin = Math.max(70, Math.min(330, by));
+                        const bounds = item.getBounds();
+                        const testRect = {
+                            left: bxMin - (bounds.right - bounds.left) / 2,
+                            top: byMin - (bounds.bottom - bounds.top) / 2,
+                            right: bxMin + (bounds.right - bounds.left) / 2,
+                            bottom: byMin + (bounds.bottom - bounds.top) / 2,
+                        };
+                        let overlaps = false;
+                        for (const or of occupiedRects) {
+                            if (!(testRect.right < or.left || testRect.left > or.right ||
+                                    testRect.bottom < or.top || testRect.top > or.bottom)) {
+                                overlaps = true;
+                                break;
+                            }
+                        }
+                        if (!overlaps) {
+                            item.initX = bxMin;
+                            item.initY = byMin;
+                            item.x = bxMin;
+                            item.y = byMin;
+                            item.isPlaced = false;
+                            occupiedRects.push(testRect);
+                            placed = true;
+                        }
+                        attempts++;
+                    }
+                    if (!placed) {
+                        item.x = item.initX;
+                        item.y = item.initY;
+                        const bounds = item.getBounds();
+                        occupiedRects.push({
+                            left: item.x - (bounds.right - bounds.left) / 2,
+                            top: item.y - (bounds.bottom - bounds.top) / 2,
+                            right: item.x + (bounds.right - bounds.left) / 2,
+                            bottom: item.y + (bounds.bottom - bounds.top) / 2,
+                        });
+                    }
+                }
+            }
+
+            // ==================== 计时器 ====================
+            function startTimer() {
+                stopTimer();
+                timerInterval = setInterval(() => {
+                    if (!isPaused && gameState === STATE.PLAYING) {
+                        timerSeconds++;
+                    }
+                }, 1000);
+            }
+
+            function stopTimer() {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+            }
+
+            function formatTime(seconds) {
+                const m = Math.floor(seconds / 60);
+                const s = seconds % 60;
+                return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+            }
+
+            function getStars(seconds) {
+                if (seconds <= 20) return 3;
+                if (seconds <= 40) return 2;
+                return 1;
+            }
+
+            // ==================== 拖拽管理 ====================
+            let dragItem = null;
+            let dragOffsetX = 0;
+            let dragOffsetY = 0;
+            let isDragging = false;
+            let mouseX = 0;
+            let mouseY = 0;
+
+            function getCanvasPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = LOGIC_WIDTH / rect.width;
+                const scaleY = LOGIC_HEIGHT / rect.height;
+                let clientX, clientY;
+                if (e.touches && e.touches.length > 0) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } else if (e.changedTouches && e.changedTouches.length > 0) {
+                    clientX = e.changedTouches[0].clientX;
+                    clientY = e.changedTouches[0].clientY;
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+                return {
+                    x: (clientX - rect.left) * scaleX,
+                    y: (clientY - rect.top) * scaleY
+                };
+            }
+
+            function findItemAt(px, py) {
+                if (!currentLevelData) return null;
+                const items = currentLevelData.items;
+                // 从后往前查找（上层优先）
+                for (let i = items.length - 1; i >= 0; i--) {
+                    const item = items[i];
+                    if (!item.isPlaced && item.containsPoint(px, py)) {
+                        return item;
+                    }
+                }
+                return null;
+            }
+
+            function handlePointerDown(e) {
+                initAudio();
+                if (gameState === STATE.PAUSED) {
+                    // 点击暂停遮罩恢复
+                    isPaused = false;
+                    gameState = STATE.PLAYING;
+                    return;
+                }
+                if (gameState === STATE.LEVEL_COMPLETE) {
+                    // 通关后点击进入下一关
+                    if (currentLevelIndex < 2) {
+                        loadLevel(currentLevelIndex + 1);
+                    } else {
+                        gameState = STATE.ALL_COMPLETE;
+                        stopTimer();
+                        mangoZai.triggerCelebrate();
+                        playCelebrateSound();
+                    }
+                    return;
+                }
+                if (gameState === STATE.ALL_COMPLETE) {
+                    // 全部通关后点击重新开始
+                    gameState = STATE.MENU;
+                    return;
+                }
+                if (gameState === STATE.MENU) {
+                    loadLevel(0);
+                    return;
+                }
+                if (gameState !== STATE.PLAYING) return;
+                if (isPaused) return;
+
+                const pos = getCanvasPos(e);
+                mouseX = pos.x;
+                mouseY = pos.y;
+                const item = findItemAt(pos.x, pos.y);
+                if (item && !item.isPlaced) {
+                    dragItem = item;
+                    dragOffsetX = item.x - pos.x;
+                    dragOffsetY = item.y - pos.y;
+                    item.isDragging = true;
+                    isDragging = true;
+                    playDragSound();
+                }
+                e.preventDefault();
+            }
+
+            function handlePointerMove(e) {
+                const pos = getCanvasPos(e);
+                mouseX = pos.x;
+                mouseY = pos.y;
+                if (isDragging && dragItem) {
+                    dragItem.x = pos.x + dragOffsetX;
+                    dragItem.y = pos.y + dragOffsetY;
+                    // 限制在画布内
+                    dragItem.x = Math.max(10, Math.min(LOGIC_WIDTH - 10, dragItem.x));
+                    dragItem.y = Math.max(10, Math.min(LOGIC_HEIGHT - 10, dragItem.y));
+                }
+                e.preventDefault();
+            }
+
+            function handlePointerUp(e) {
+                if (!isDragging || !dragItem) {
+                    isDragging = false;
+                    dragItem = null;
+                    return;
+                }
+                const item = dragItem;
+                item.isDragging = false;
+                isDragging = false;
+                dragItem = null;
+
+                // 检测是否匹配虚线框
+                let bestSlot = null;
+                let bestDist = Infinity;
+                const itemCx = item.getCenterX();
+                const itemCy = item.getCenterY();
+
+                for (const slot of currentLevelData.slots) {
+                    if (slot.isOccupied) continue;
+                    if (slot.itemId !== item.id) continue;
+                    const slotCx = slot.getCenterX();
+                    const slotCy = slot.getCenterY();
+                    const dist = Math.sqrt((itemCx - slotCx) ** 2 + (itemCy - slotCy) ** 2);
+                    if (dist < bestDist) {
+                        bestDist = dist;
+                        bestSlot = slot;
+                    }
+                }
+
+                if (bestSlot && bestDist < 20) {
+                    // 归位成功
+                    item.placeAt(bestSlot.targetX, bestSlot.targetY);
+                    bestSlot.isOccupied = true;
+                    playSuccessSound();
+                    spawnParticles(bestSlot.targetX, bestSlot.targetY, 8);
+                    // 检查是否全部归位
+                    checkLevelComplete();
+                } else {
+                    // 归位失败，弹回
+                    item.x = item.initX;
+                    item.y = item.initY;
+                    playErrorSound();
+                }
+                e.preventDefault();
+            }
+
+            function checkLevelComplete() {
+                const allPlaced = currentLevelData.slots.every(s => s.isOccupied);
+                if (allPlaced) {
+                    stopTimer();
+                    const stars = getStars(timerSeconds);
+                    currentLevelData.stars = stars;
+                    gameState = STATE.LEVEL_COMPLETE;
+                    mangoZai.triggerCelebrate();
+                    playCelebrateSound();
+                    // 保存成绩
+                    if (!currentLevelData.completedTime) {
+                        currentLevelData.completedTime = timerSeconds;
+                    }
+                }
+            }
+
+            // ==================== 事件监听 ====================
+            canvas.addEventListener('mousedown', handlePointerDown);
+            canvas.addEventListener('mousemove', handlePointerMove);
+            canvas.addEventListener('mouseup', handlePointerUp);
+            canvas.addEventListener('mouseleave', handlePointerUp);
+            canvas.addEventListener('touchstart', handlePointerDown, { passive: false });
+            canvas.addEventListener('touchmove', handlePointerMove, { passive: false });
+            canvas.addEventListener('touchend', handlePointerUp);
+            canvas.addEventListener('touchcancel', handlePointerUp);
+
+            // 窗口失去焦点暂停计时
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden && gameState === STATE.PLAYING && !isPaused) {
+                    isPaused = true;
+                }
+            });
+
+            // ==================== 芒果崽实例 ====================
+            const mangoZai = new MangoZai(50, 38, 0.75);
+
+            // ==================== UI绘制函数 ====================
+            function drawTopBar(ctx) {
+                // 顶部信息栏背景
+                ctx.fillStyle = 'rgba(255,255,255,0.85)';
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(0, 0, LOGIC_WIDTH, 56, 0) : ctx.rect(0, 0, LOGIC_WIDTH, 56);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(255,106,0,0.08)';
+                ctx.fillRect(0, 54, LOGIC_WIDTH, 2);
+
+                // 关卡名
+                ctx.fillStyle = MANGO_ORANGE;
+                ctx.font = 'bold 13px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(currentLevelData ? currentLevelData.sceneName : '完美收纳大师', 60, 24);
+
+                // 计时器
+                ctx.fillStyle = '#444';
+                ctx.font = 'bold 15px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(formatTime(timerSeconds), LOGIC_WIDTH / 2, 24);
+
+                // 暂停按钮
+                const pauseBtnX = LOGIC_WIDTH - 38;
+                const pauseBtnY = 10;
+                ctx.fillStyle = MANGO_ORANGE;
+                ctx.beginPath();
+                ctx.arc(pauseBtnX, pauseBtnY + 12, 15, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFF';
+                if (isPaused) {
+                    // 播放三角
+                    ctx.beginPath();
+                    ctx.moveTo(pauseBtnX - 5, pauseBtnY + 7);
+                    ctx.lineTo(pauseBtnX - 5, pauseBtnY + 17);
+                    ctx.lineTo(pauseBtnX + 7, pauseBtnY + 12);
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    // 暂停双竖线
+                    ctx.fillRect(pauseBtnX - 5, pauseBtnY + 7, 3.5, 10);
+                    ctx.fillRect(pauseBtnX + 1.5, pauseBtnY + 7, 3.5, 10);
+                }
+                // 存储暂停按钮位置供点击检测
+                currentLevelData._pauseBtnRect = {
+                    cx: pauseBtnX,
+                    cy: pauseBtnY + 12,
+                    r: 15
+                };
+            }
+
+            function drawBottomBar(ctx) {
+                ctx.fillStyle = 'rgba(255,255,255,0.85)';
+                ctx.fillRect(0, LOGIC_HEIGHT - 52, LOGIC_WIDTH, 52);
+                ctx.fillStyle = 'rgba(255,106,0,0.08)';
+                ctx.fillRect(0, LOGIC_HEIGHT - 52, LOGIC_WIDTH, 2);
+
+                // 重试按钮
+                const retryX = 80;
+                const retryY = LOGIC_HEIGHT - 28;
+                ctx.fillStyle = '#888';
+                ctx.beginPath();
+                ctx.arc(retryX, retryY, 16, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFF';
+                ctx.font = 'bold 11px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('重试', retryX, retryY + 4);
+                currentLevelData._retryBtnRect = { cx: retryX, cy: retryY, r: 16 };
+
+                // 提示按钮
+                const hintX = LOGIC_WIDTH - 80;
+                const hintY = LOGIC_HEIGHT - 28;
+                const hintDisabled = hintUsed;
+                ctx.fillStyle = hintDisabled ? '#CCC' : '#FFB74D';
+                ctx.beginPath();
+                ctx.arc(hintX, hintY, 16, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFF';
+                ctx.fillText('提示', hintX, hintY + 4);
+                if (hintDisabled) {
+                    ctx.strokeStyle = '#999';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(hintX - 8, hintY - 8);
+                    ctx.lineTo(hintX + 8, hintY + 8);
+                    ctx.stroke();
+                }
+                currentLevelData._hintBtnRect = { cx: hintX, cy: hintY, r: 16 };
+            }
+
+            function drawPauseOverlay(ctx) {
+                // 半透明遮罩
+                ctx.fillStyle = 'rgba(0,0,0,0.55)';
+                ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
+
+                // 暂停图标
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 - 20, 35, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = MANGO_ORANGE;
+                ctx.fillRect(LOGIC_WIDTH / 2 - 10, LOGIC_HEIGHT / 2 - 35, 7, 28);
+                ctx.fillRect(LOGIC_WIDTH / 2 + 3, LOGIC_HEIGHT / 2 - 35, 7, 28);
+
+                ctx.fillStyle = '#FFF';
+                ctx.font = 'bold 18px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('已暂停', LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 + 40);
+                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.font = '13px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText('点击任意位置继续', LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 + 65);
+            }
+
+            function drawLevelCompleteOverlay(ctx) {
+                const stars = currentLevelData.stars || 1;
+                const showName = currentLevelData.showName || '';
+
+                // 遮罩
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
+
+                // 面板
+                const panelX = LOGIC_WIDTH / 2 - 130;
+                const panelY = 180;
+                const panelW = 260;
+                const panelH = 340;
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(panelX, panelY, panelW, panelH, 20) : ctx.rect(panelX, panelY, panelW,
+                panelH);
+                ctx.fill();
+                ctx.strokeStyle = MANGO_ORANGE;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // 标题
+                ctx.fillStyle = MANGO_ORANGE;
+                ctx.font = 'bold 20px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('收纳完成!', LOGIC_WIDTH / 2, panelY + 40);
+
+                // 星级
+                const starY = panelY + 80;
+                for (let i = 0; i < 3; i++) {
+                    const sx = LOGIC_WIDTH / 2 - 35 + i * 35;
+                    if (i < stars) {
+                        // 亮星
+                        drawStar(ctx, sx, starY, 14, '#FFD700', '#FFA000');
+                    } else {
+                        // 暗星
+                        drawStar(ctx, sx, starY, 14, '#DDD', '#BBB');
+                    }
+                }
+
+                // 用时
+                ctx.fillStyle = '#555';
+                ctx.font = '15px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText('用时: ' + formatTime(timerSeconds), LOGIC_WIDTH / 2, starY + 45);
+
+                // 灵感来源
+                ctx.fillStyle = '#FF6A00';
+                ctx.font = 'bold 13px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText('灵感来源：《' + showName + '》', LOGIC_WIDTH / 2, starY + 75);
+
+                // 下一关提示
+                const nextText = currentLevelIndex < 2 ? '点击进入下一关' : '点击查看总成绩';
+                ctx.fillStyle = '#FFF';
+                const btnY = panelY + panelH - 50;
+                const btnGrad = ctx.createLinearGradient(0, btnY - 18, 0, btnY + 18);
+                btnGrad.addColorStop(0, '#FF8A3C');
+                btnGrad.addColorStop(1, '#FF6A00');
+                ctx.fillStyle = btnGrad;
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(LOGIC_WIDTH / 2 - 70, btnY - 18, 140, 36, 18) : ctx.rect(LOGIC_WIDTH / 2 -
+                    70, btnY - 18, 140, 36);
+                ctx.fill();
+                ctx.fillStyle = '#FFF';
+                ctx.font = 'bold 14px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText(nextText, LOGIC_WIDTH / 2, btnY + 5);
+
+                currentLevelData._completeClickArea = {
+                    x: panelX,
+                    y: panelY,
+                    w: panelW,
+                    h: panelH
+                };
+            }
+
+            function drawStar(ctx, cx, cy, size, fillColor, strokeColor) {
+                ctx.fillStyle = fillColor;
+                ctx.strokeStyle = strokeColor;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const spikes = 5;
+                const outerR = size;
+                const innerR = size * 0.4;
+                for (let i = 0; i < spikes * 2; i++) {
+                    const r = i % 2 === 0 ? outerR : innerR;
+                    const angle = (Math.PI * 2 / (spikes * 2)) * i - Math.PI / 2;
+                    const px = cx + Math.cos(angle) * r;
+                    const py = cy + Math.sin(angle) * r;
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            function drawAllCompleteScreen(ctx) {
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
+
+                // 面板
+                const px = LOGIC_WIDTH / 2 - 140;
+                const py = 150;
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(px, py, 280, 400, 20) : ctx.rect(px, py, 280, 400);
+                ctx.fill();
+                ctx.strokeStyle = MANGO_ORANGE;
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // 奖杯
+                const trophyX = LOGIC_WIDTH / 2;
+                const trophyY = py + 60;
+                // 杯身
+                const cupGrad = ctx.createLinearGradient(0, trophyY - 30, 0, trophyY + 20);
+                cupGrad.addColorStop(0, '#FFD700');
+                cupGrad.addColorStop(1, '#DAA520');
+                ctx.fillStyle = cupGrad;
+                ctx.beginPath();
+                ctx.moveTo(trophyX - 25, trophyY - 28);
+                ctx.lineTo(trophyX - 18, trophyY + 18);
+                ctx.lineTo(trophyX + 18, trophyY + 18);
+                ctx.lineTo(trophyX + 25, trophyY - 28);
+                ctx.closePath();
+                ctx.fill();
+                ctx.strokeStyle = '#B8860B';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                // 杯耳
+                ctx.fillStyle = '#DAA520';
+                ctx.beginPath();
+                ctx.arc(trophyX - 24, trophyY - 5, 12, -Math.PI / 2, Math.PI / 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(trophyX + 24, trophyY - 5, 12, Math.PI / 2, -Math.PI / 2);
+                ctx.fill();
+                ctx.stroke();
+                // 底座
+                ctx.fillStyle = '#DAA520';
+                ctx.fillRect(trophyX - 30, trophyY + 16, 60, 10);
+                ctx.fillRect(trophyX - 20, trophyY + 24, 40, 8);
+                // 星星在奖杯顶部
+                drawStar(ctx, trophyX, trophyY - 35, 10, '#FFD700', '#B8860B');
+
+                // 标题
+                ctx.fillStyle = MANGO_ORANGE;
+                ctx.font = 'bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('恭喜成为', LOGIC_WIDTH / 2, py + 130);
+                ctx.fillText('完美收纳大师!', LOGIC_WIDTH / 2, py + 158);
+
+                // 总成绩
+                ctx.fillStyle = '#555';
+                ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+                const totalStars = (levelBuilders.map((_, i) => {
+                    const data = levelBuilders[i]();
+                    return data.stars || 1;
+                })).reduce((a, b) => a + b, 0);
+                // 重新计算各关卡星级
+                let allStars = 0;
+                for (let i = 0; i < 3; i++) {
+                    const ld = levelBuilders[i]();
+                    allStars += ld.stars || 1;
+                }
+                ctx.fillText('总星数: ' + '⭐'.repeat(Math.min(allStars, 9)), LOGIC_WIDTH / 2, py + 195);
+
+                ctx.fillStyle = '#888';
+                ctx.font = '12px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText('点击任意位置重新开始', LOGIC_WIDTH / 2, py + 240);
+
+                // 小芒果崽
+                mangoZai.baseX = LOGIC_WIDTH / 2;
+                mangoZai.baseY = py + 320;
+                mangoZai.scale = 0.9;
+                mangoZai.draw(ctx);
+                mangoZai.baseX = 50;
+                mangoZai.baseY = 38;
+                mangoZai.scale = 0.75;
+            }
+
+            function drawSceneDecoration(ctx) {
+                if (!currentLevelData) return;
+                const dt = currentLevelData.decorationType;
+                ctx.save();
+                ctx.globalAlpha = 0.35;
+
+                if (dt === 'dressingTable') {
+                    // 化妆镜
+                    ctx.fillStyle = '#E8D5C4';
+                    ctx.beginPath();
+                    ctx.ellipse(LOGIC_WIDTH / 2, 380, 110, 60, 0, Math.PI, 0);
+                    ctx.fill();
+                    ctx.strokeStyle = '#C9A88C';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                    // 灯光点
+                    for (let i = 0; i < 12; i++) {
+                        const angle = Math.PI + (Math.PI / 11) * i;
+                        const lx = LOGIC_WIDTH / 2 + Math.cos(angle) * 105;
+                        const ly = 380 + Math.sin(angle) * 55;
+                        ctx.fillStyle = '#FFE082';
+                        ctx.beginPath();
+                        ctx.arc(lx, ly, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    // "化妆台"文字
+                    ctx.fillStyle = '#C9A88C';
+                    ctx.font = 'italic 12px "PingFang SC","Microsoft YaHei",sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('✨ 化妆收纳盒 ✨', LOGIC_WIDTH / 2, 420);
+                } else if (dt === 'suitcase') {
+                    // 行李箱外壳
+                    ctx.fillStyle = '#5C8DB5';
+                    ctx.beginPath();
+                    ctx.roundRect ? ctx.roundRect(40, 375, 320, 230, 18) : ctx.rect(40, 375, 320, 230);
+                    ctx.fill();
+                    ctx.strokeStyle = '#3D6A8A';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    // 箱体中线
+                    ctx.strokeStyle = '#3D6A8A';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(LOGIC_WIDTH / 2, 375);
+                    ctx.lineTo(LOGIC_WIDTH / 2, 605);
+                    ctx.stroke();
+                    // 把手
+                    ctx.fillStyle = '#3D6A8A';
+                    ctx.fillRect(LOGIC_WIDTH / 2 - 25, 368, 50, 10);
+                    ctx.fillRect(LOGIC_WIDTH / 2 - 8, 360, 16, 22);
+                } else if (dt === 'fridge') {
+                    // 冰箱内部
+                    ctx.fillStyle = '#E8F4E8';
+                    ctx.fillRect(30, 375, 340, 240);
+                    ctx.strokeStyle = '#B0C8B0';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(30, 375, 340, 240);
+                    // 层架
+                    for (let ly = 448; ly < 600; ly += 52) {
+                        ctx.strokeStyle = '#C8DCC8';
+                        ctx.lineWidth = 1.5;
+                        ctx.setLineDash([3, 2]);
+                        ctx.beginPath();
+                        ctx.moveTo(35, ly);
+                        ctx.lineTo(365, ly);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+                }
+                ctx.restore();
+            }
+
+            function drawClutterZoneLabel(ctx) {
+                ctx.save();
+                ctx.globalAlpha = 0.3;
+                ctx.fillStyle = '#999';
+                ctx.font = '11px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('— 杂乱区 —', LOGIC_WIDTH / 2, 65);
+                ctx.restore();
+            }
+
+            function drawTargetZoneLabel(ctx) {
+                ctx.save();
+                ctx.globalAlpha = 0.3;
+                ctx.fillStyle = '#999';
+                ctx.font = '11px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('— 目标收纳区 —', LOGIC_WIDTH / 2, 360);
+                ctx.restore();
+            }
+
+            // ==================== 主循环 ====================
+            let lastTime = 0;
+
+            function gameLoop(timestamp) {
+                const dt = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.1) : 0.016;
+                lastTime = timestamp;
+
+                // 更新
+                mangoZai.update(dt);
+                updateParticles();
+
+                if (currentLevelData && gameState === STATE.PLAYING && !isPaused) {
+                    for (const item of currentLevelData.items) {
+                        item.update();
+                    }
+                }
+
+                // 提示闪烁计时
+                if (hintTargetId && hintUsed) {
+                    if (Date.now() - hintStartTime > HINT_DURATION) {
+                        hintTargetId = null;
+                    }
+                }
+
+                // 绘制
+                ctx.clearRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
+
+                // 背景
+                const bgColor = currentLevelData ? currentLevelData.bgColor : CREAM_BG;
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
+
+                // 场景装饰
+                if (gameState === STATE.PLAYING || gameState === STATE.PAUSED) {
+                    drawSceneDecoration(ctx);
+                }
+
+                // 杂乱区标签
+                if (gameState === STATE.PLAYING && currentLevelData) {
+                    drawClutterZoneLabel(ctx);
+                    drawTargetZoneLabel(ctx);
+                }
+
+                // 绘制虚线框
+                if (currentLevelData && (gameState === STATE.PLAYING || gameState === STATE.PAUSED ||
+                        gameState === STATE.LEVEL_COMPLETE)) {
+                    for (const slot of currentLevelData.slots) {
+                        slot.draw(ctx);
+                    }
+                }
+
+                // 绘制物品（先绘制已放置的，再绘制未放置的）
+                if (currentLevelData && (gameState === STATE.PLAYING || gameState === STATE.PAUSED ||
+                        gameState === STATE.LEVEL_COMPLETE)) {
+                    // 未放置的
+                    for (const item of currentLevelData.items) {
+                        if (!item.isPlaced && item !== dragItem) {
+                            const isHinted = hintTargetId === item.id;
+                            item.draw(ctx, isHinted);
+                        }
+                    }
+                    // 正在拖拽的
+                    if (dragItem && dragItem.isDragging) {
+                        dragItem.draw(ctx, false);
+                    }
+                    // 已放置的
+                    for (const item of currentLevelData.items) {
+                        if (item.isPlaced) {
+                            item.draw(ctx, false);
+                        }
+                    }
+                }
+
+                // 粒子
+                drawParticles(ctx);
+
+                // 芒果崽
+                if (gameState === STATE.PLAYING || gameState === STATE.PAUSED || gameState === STATE.LEVEL_COMPLETE) {
+                    mangoZai.draw(ctx);
+                }
+
+                // 顶部栏
+                if (currentLevelData && (gameState === STATE.PLAYING || gameState === STATE.PAUSED)) {
+                    drawTopBar(ctx);
+                    drawBottomBar(ctx);
+                }
+
+                // 暂停遮罩
+                if (isPaused && gameState === STATE.PAUSED) {
+                    drawPauseOverlay(ctx);
+                }
+
+                // 通关结算
+                if (gameState === STATE.LEVEL_COMPLETE && currentLevelData) {
+                    drawLevelCompleteOverlay(ctx);
+                    // 芒果崽在结算界面也要显示
+                    mangoZai.baseX = LOGIC_WIDTH / 2;
+                    mangoZai.baseY = 140;
+                    mangoZai.scale = 0.85;
+                    mangoZai.draw(ctx);
+                    mangoZai.baseX = 50;
+                    mangoZai.baseY = 38;
+                    mangoZai.scale = 0.75;
+                }
+
+                // 全部通关
+                if (gameState === STATE.ALL_COMPLETE) {
+                    drawAllCompleteScreen(ctx);
+                }
+
+                // 主菜单
+                if (gameState === STATE.MENU) {
+                    drawMainMenu(ctx);
+                }
+
+                requestAnimationFrame(gameLoop);
+            }
+
+            function drawMainMenu(ctx) {
+                // 背景
+                ctx.fillStyle = CREAM_BG;
+                ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
+
+                // 装饰圆点
+                for (let i = 0; i < 20; i++) {
+                    const dx = (i * 73 + 30) % LOGIC_WIDTH;
+                    const dy = (i * 97 + 50) % LOGIC_HEIGHT;
+                    ctx.fillStyle = 'rgba(255,106,0,' + (0.04 + (i % 5) * 0.02) + ')';
+                    ctx.beginPath();
+                    ctx.arc(dx, dy, 8 + (i % 4) * 6, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 标题区域
+                const titleY = 170;
+                // 芒果崽在标题上方
+                mangoZai.baseX = LOGIC_WIDTH / 2;
+                mangoZai.baseY = titleY - 70;
+                mangoZai.scale = 1.1;
+                mangoZai.draw(ctx);
+                mangoZai.baseX = 50;
+                mangoZai.baseY = 38;
+                mangoZai.scale = 0.75;
+
+                // 标题
+                ctx.fillStyle = MANGO_ORANGE;
+                ctx.font = 'bold 30px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('完美收纳大师', LOGIC_WIDTH / 2, titleY + 20);
+
+                // 副标题
+                ctx.fillStyle = '#888';
+                ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText('芒果TV · 收纳解压小游戏', LOGIC_WIDTH / 2, titleY + 50);
+
+                // 开始按钮
+                const btnY = titleY + 100;
+                const btnGrad = ctx.createLinearGradient(0, btnY - 22, 0, btnY + 22);
+                btnGrad.addColorStop(0, '#FF9A3C');
+                btnGrad.addColorStop(1, '#FF6A00');
+                ctx.fillStyle = btnGrad;
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(LOGIC_WIDTH / 2 - 70, btnY - 22, 140, 44, 22) : ctx.rect(LOGIC_WIDTH / 2 -
+                    70, btnY - 22, 140, 44);
+                ctx.fill();
+                // 按钮阴影
+                ctx.fillStyle = 'rgba(0,0,0,0.15)';
+                ctx.fillRect(LOGIC_WIDTH / 2 - 68, btnY + 22, 136, 4);
+
+                ctx.fillStyle = '#FFF';
+                ctx.font = 'bold 18px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.fillText('开始游戏', LOGIC_WIDTH / 2, btnY + 7);
+
+                // 关卡预览
+                const previewY = btnY + 70;
+                const levelNames = ['乘风化妆台', '花儿与少年旅行箱', '蘑菇屋冰箱'];
+                const showNames = ['乘风破浪的姐姐', '花儿与少年', '向往的生活'];
+                for (let i = 0; i < 3; i++) {
+                    const ly = previewY + i * 42;
+                    ctx.fillStyle = '#FFF';
+                    ctx.beginPath();
+                    ctx.roundRect ? ctx.roundRect(45, ly - 14, 310, 34, 10) : ctx.rect(45, ly - 14, 310, 34);
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(255,106,0,0.2)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    ctx.fillStyle = MANGO_ORANGE;
+                    ctx.font = 'bold 13px "PingFang SC","Microsoft YaHei",sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('第' + (i + 1) + '关', 58, ly + 5);
+
+                    ctx.fillStyle = '#444';
+                    ctx.fillText(levelNames[i], 110, ly + 5);
+
+                    ctx.fillStyle = '#999';
+                    ctx.font = '11px "PingFang SC","Microsoft YaHei",sans-serif';
+                    ctx.fillText('《' + showNames[i] + '》', 260, ly + 5);
+                }
+
+                // 底部提示
+                ctx.fillStyle = '#BBB';
+                ctx.font = '12px "PingFang SC","Microsoft YaHei",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('点击"开始游戏"或直接触摸屏幕开始', LOGIC_WIDTH / 2, LOGIC_HEIGHT - 25);
+
+                // 存储开始按钮区域
+                currentLevelData = currentLevelData || {};
+                currentLevelData._menuStartRect = {
+                    x: LOGIC_WIDTH / 2 - 70,
+                    y: btnY - 22,
+                    w: 140,
+                    h: 44
+                };
+            }
+
+            // ==================== 暂停按钮点击处理 ====================
+            function handleCanvasClickForUI(e) {
+                const pos = getCanvasPos(e);
+                const px = pos.x;
+                const py = pos.y;
+
+                if (gameState === STATE.MENU) {
+                    initAudio();
+                    loadLevel(0);
+                    return;
+                }
+
+                if (gameState === STATE.ALL_COMPLETE) {
+                    gameState = STATE.MENU;
+                    currentLevelData = null;
+                    timerSeconds = 0;
+                    stopTimer();
+                    return;
+                }
+
+                if (gameState === STATE.LEVEL_COMPLETE && currentLevelData && currentLevelData._completeClickArea) {
+                    if (currentLevelIndex < 2) {
+                        loadLevel(currentLevelIndex + 1);
+                    } else {
+                        gameState = STATE.ALL_COMPLETE;
+                        stopTimer();
+                        mangoZai.triggerCelebrate();
+                        playCelebrateSound();
+                    }
+                    return;
+                }
+
+                if (gameState === STATE.PAUSED) {
+                    isPaused = false;
+                    gameState = STATE.PLAYING;
+                    return;
+                }
+
+                if (gameState !== STATE.PLAYING || !currentLevelData) return;
+
+                // 检查暂停按钮
+                const pauseRect = currentLevelData._pauseBtnRect;
+                if (pauseRect) {
+                    const dist = Math.sqrt((px - pauseRect.cx) ** 2 + (py - pauseRect.cy) ** 2);
+                    if (dist <= pauseRect.r + 3) {
+                        isPaused = !isPaused;
+                        gameState = isPaused ? STATE.PAUSED : STATE.PLAYING;
+                        return;
+                    }
+                }
+
+                // 检查重试按钮
+                const retryRect = currentLevelData._retryBtnRect;
+                if (retryRect) {
+                    const dist = Math.sqrt((px - retryRect.cx) ** 2 + (py - retryRect.cy) ** 2);
+                    if (dist <= retryRect.r + 3) {
+                        loadLevel(currentLevelIndex);
+                        return;
+                    }
+                }
+
+                // 检查提示按钮
+                const hintRect = currentLevelData._hintBtnRect;
+                if (hintRect && !hintUsed) {
+                    const dist = Math.sqrt((px - hintRect.cx) ** 2 + (py - hintRect.cy) ** 2);
+                    if (dist <= hintRect.r + 3) {
+                        // 找一个未归位的物品
+                        const unplaced = currentLevelData.items.filter(it => !it.isPlaced);
+                        if (unplaced.length > 0) {
+                            const target = unplaced[Math.floor(Math.random() * unplaced.length)];
+                            hintTargetId = target.id;
+                            hintUsed = true;
+                            hintStartTime = Date.now();
+                            playStarSound();
+                        }
+                        return;
+                    }
+                }
+            }
+
+            // 将UI点击与拖拽事件合并处理
+            const originalHandlePointerDown = handlePointerDown;
+            handlePointerDown = function(e) {
+                initAudio();
+                const pos = getCanvasPos(e);
+                const px = pos.x;
+                const py = pos.y;
+
+                // 先检查UI元素
+                if (gameState === STATE.MENU) {
+                    gameState = STATE.MENU;
+                    handleCanvasClickForUI(e);
+                    return;
+                }
+                if (gameState === STATE.ALL_COMPLETE) {
+                    handleCanvasClickForUI(e);
+                    return;
+                }
+                if (gameState === STATE.LEVEL_COMPLETE) {
+                    handleCanvasClickForUI(e);
+                    return;
+                }
+                if (gameState === STATE.PAUSED) {
+                    handleCanvasClickForUI(e);
+                    return;
+                }
+
+                // 检查暂停按钮
+                if (currentLevelData && currentLevelData._pauseBtnRect) {
+                    const pr = currentLevelData._pauseBtnRect;
+                    if (Math.sqrt((px - pr.cx) ** 2 + (py - pr.cy) ** 2) <= pr.r + 3) {
+                        handleCanvasClickForUI(e);
+                        return;
+                    }
+                }
+                // 检查重试按钮
+                if (currentLevelData && currentLevelData._retryBtnRect) {
+                    const rr = currentLevelData._retryBtnRect;
+                    if (Math.sqrt((px - rr.cx) ** 2 + (py - rr.cy) ** 2) <= rr.r + 3) {
+                        handleCanvasClickForUI(e);
+                        return;
+                    }
+                }
+                // 检查提示按钮
+                if (currentLevelData && currentLevelData._hintBtnRect && !hintUsed) {
+                    const hr = currentLevelData._hintBtnRect;
+                    if (Math.sqrt((px - hr.cx) ** 2 + (py - hr.cy) ** 2) <= hr.r + 3) {
+                        handleCanvasClickForUI(e);
+                        return;
+                    }
+                }
+
+                // 否则进行拖拽
+                originalHandlePointerDown(e);
+            };
+
+            // ==================== 初始化 ====================
+            function init() {
+                currentLevelData = null;
+                gameState = STATE.MENU;
+                timerSeconds = 0;
+                isPaused = false;
+                hintUsed = false;
+                hintTargetId = null;
+                particles = [];
+                dragItem = null;
+                isDragging = false;
+                stopTimer();
+                lastTime = performance.now();
+                requestAnimationFrame(gameLoop);
+            }
+
+            // ==================== 启动游戏 ====================
+            init();
+
+            console.log('🎮 完美收纳大师 - 芒果TV小游戏已就绪');
+            console.log('🍊 品牌色: #FF6A00 | 芒果崽已上线');
+            console.log('📦 3个关卡: 乘风化妆台 | 花儿与少年旅行箱 | 蘑菇屋冰箱');
+            console.log('🖱️ 支持鼠标拖拽和触摸操作');
+            console.log('✨ 祝您在"马栏山杯"比赛中取得好成绩！');
+        })();
+    </script>
 </body>
 </html>
